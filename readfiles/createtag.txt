@@ -1,0 +1,31 @@
+Something
+
+//array tag
+<array objval='GalleryStructure' label='GalleryLabel' editval='GalleryEdit'></array>
+//array tag
+
+"<array objval='" + sails._.capitalize(n.name) + "Structure' label='" + sails._.capitalize(n.name) + "' editval='" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "'></array>"
+
+//uiselect tag
+<div class='form-group ui-selecter'><label for='exampleInputEmail1'>Select " + sails._.capitalize(n.name) + "</label><div class='form-group'><ui-select multiple tagging tagging-label='false' ng-model = '" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' on-select='ismatch(" + page.name.toLowerCase() + "." + n.name.toLowerCase() + ",$select);'><ui-select-match placeholder='Select " + sails._.capitalize(n.name) + "'>{{$item.name}}</ui-select-match><ui-select-choices repeat='person in " + n.name.toLowerCase() + " track by person._id' refresh='refresh" + sails._.capitalize(n.name) + "($select.search,$select.selected)' refresh-delay='0'><div ng-bind-html='person.name'></div></ui-select-choices></ui-select></div></div>
+//uiselect tag
+
+"<div class='form-group ui-selecter'><label for='exampleInputEmail1'>Select " + sails._.capitalize(n.name) + "</label><div class='form-group'><ui-select multiple tagging tagging-label='false' ng-model = '" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' on-select='ismatch(" + page.name.toLowerCase() + "." + n.name.toLowerCase() + ",$select);'><ui-select-match placeholder='Select " + sails._.capitalize(n.name) + "'>{{$item.name}}</ui-select-match><ui-select-choices repeat='person in " + n.name.toLowerCase() + " track by person._id' refresh='refresh" + sails._.capitalize(n.name) + "($select.search,$select.selected)' refresh-delay='0'><div ng-bind-html='person.name'></div></ui-select-choices></ui-select></div></div>"
+
+//select tag true
+<div class='form-group'><label>" + sails._.capitalize(n.name) + "</label> <select ng-model = '" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' class = 'form-control'> <option value =''>Please Select</option> <option ng-repeat = 'value in " + sails._.camelCase(n.name).toLowerCase() + "' value='{{value._id}}'>{{value.name}}</option></select></div>
+//select tag true
+
+//select tag false
+<div class='form-group'><label>" + sails._.capitalize(n.name) + "</label> <select ng-model = '" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' class = 'form-control'>
+//select tag false
+
+//textarea tag
+<div class='form-group'><label for='exampleInputEmail1'>" + sails._.capitalize(n.name) + "</label><textarea class='form-control' ng-model = '" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' placeholder='" + sails._.capitalize(n.name) + "'
+//textarea tag
+
+//default tag
+<div class='form-group'><label>" + sails._.capitalize(n.name) + "</label><input type='" + n.type + "' class='form-control' ng-model = '" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' placeholder='" + sails._.capitalize(n.name) + "'
+//default tag
+
+Something

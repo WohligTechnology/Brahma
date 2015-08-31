@@ -1,0 +1,79 @@
+<div class="page">
+    <h2 class="title">
+</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+            <section class="panel panel-default" style="border-radius:0px;">
+                <div class="panel-heading panel-hdr"><span class="glyphicon glyphicon-th mr5"></span>Edit Order
+                </div>
+                <div class="panel-body">
+                    <form name="form_constraints" class="form-validation" data-ng-submit="submitForm()">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Artist</label>
+                            <input type="text" class="form-control" ng-model="order.artist" placeholder="Artist" required capitalize-first>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Quantity</label>
+                            <input type="text" class="form-control" ng-model="order.quantity" placeholder="Quantity" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tax</label>
+                            <input type="text" class="form-control" ng-model="order.tax" placeholder="Tax" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Shipping Charges</label>
+                            <input type="text" class="form-control" ng-model="order.shippingcharges" placeholder="Shipping Charges" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Product</label>
+                            <select class="form-control" ng-model="order.artwork" ng-options="value.artwork._id as value.artwork.name for value in artwork" multiple></select>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <input type="text" class="form-control" ng-model="order.status" placeholder="Status" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Total Amount</label>
+                            <input type="text" class="form-control" ng-model="order.totalamount" placeholder="Total Amount" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Billing Address</label>
+                            <textarea class="form-control" ng-model="order.baddress" placeholder="Billing Address" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Shipping Address</label>
+                            <textarea class="form-control" ng-model="order.saddress" placeholder="Shipping Address" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Pincode</label>
+                            <input type="text" class="form-control" ng-model="order.pincode" placeholder="Pincode" required>
+                        </div>
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" class="form-control" ng-model="order.city" placeholder="City" required>
+                        </div>
+                        <div class="form-group">
+                            <label>State</label>
+                            <input type="text" class="form-control" ng-model="order.state" placeholder="State" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Country</label>
+                            <input type="text" class="form-control" ng-model="order.country" placeholder="Country" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Payment Method</label>
+                            <input type="text" class="form-control" ng-model="order.pmethod" placeholder="Payment Method" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Discount Coupon</label>
+                            <select class="form-control" ng-model="order.discountcoupon" ng-options="value._id as value.name for value in discountcoupon"></select>
+                        </div>
+                        <div class="text-center" style="padding-bottom:20px;">
+                            <button type="submit" class="btn btn-primary all-btn">Submit</button>
+                        </div>
+                    </form>
+            </section>
+            </div>
+        </div>
+    </div>

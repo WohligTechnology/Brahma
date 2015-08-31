@@ -1,0 +1,271 @@
+{
+    "path": "C:/xampp/htdocs",
+    "projectname": "Pollution",
+    "models": [
+        {
+            "name": "User",
+            "structure": [
+                {
+                    "name": "Name",
+                    "type": "text",
+                    "validation": [
+                        "readonly"
+                    ]
+                },
+                {
+                    "name": "Facebook ID",
+                    "type": "text",
+                    "validation": [
+                        "readonly"
+                    ]
+                },
+                {
+                    "name": "Twitter ID",
+                    "type": "text",
+                    "validation": [
+                        "readonly"
+                    ]
+                },
+                {
+                    "name": "Creation Date",
+                    "type": "date",
+                    "validation": [
+                        "readonly"
+                    ]
+                },
+                {
+                    "name": "Modification Date",
+                    "type": "date",
+                    "validation": [
+                        "readonly"
+                    ]
+                },
+                {
+                    "name": "Facebook Points",
+                    "type": "text",
+                    "validation": [
+                        "readonly"
+                    ]
+                },
+                {
+                    "name": "Twitter Points",
+                    "type": "text",
+                    "validation": [
+                        "readonly"
+                    ]
+                },
+                {
+                    "name": "Total Days for End",
+                    "type": "text",
+                    "validation": [
+                        "readonly"
+                    ]
+                },
+                {
+                    "name": "Gallery",
+                    "type": "array",
+                    "structure": [
+                        {
+                            "name": "Id",
+                            "type": "text"
+                        },
+                        {
+                            "name": "FinalImage",
+                            "type": "text"
+                        },
+                        {
+                            "name": "FacebookPostid",
+                            "type": "text"
+                        },
+                        {
+                            "name": "TwitterPostid",
+                            "type": "text"
+                        }
+                    ]
+                },
+                {
+                    "name": "DailyPost",
+                    "type": "array",
+                    "structure": [
+                        {
+                            "name": "PostId",
+                            "type": "text"
+                        },
+                        {
+                            "name": "Type",
+                            "type": "text"
+                        },
+                        {
+                            "name": "Likes",
+                            "type": "text"
+                        },
+                        {
+                            "name": "Shares",
+                            "type": "text"
+                        },
+                        {
+                            "name": "Retweets",
+                            "type": "text"
+                        },
+                        {
+                            "name": "Favourites",
+                            "type": "text"
+                        },
+                        {
+                            "name": "Total",
+                            "type": "text"
+                        },
+                        {
+                            "name": "CreationDate",
+                            "type": "text"
+                        }
+                    ]
+                },
+                {
+                    "name": "Post",
+                    "type": "array",
+                    "structure": [
+                        {
+                            "name": "PostId",
+                            "type": "text"
+                        },
+                        {
+                            "name": "Type",
+                            "type": "text"
+                        },
+                        {
+                            "name": "Likes",
+                            "type": "text"
+                        },
+                        {
+                            "name": "Shares",
+                            "type": "text"
+                        },
+                        {
+                            "name": "Retweets",
+                            "type": "text"
+                        },
+                        {
+                            "name": "Favourites",
+                            "type": "text"
+                        },
+                        {
+                            "name": "Total",
+                            "type": "text"
+                        },
+                        {
+                            "name": "CreationDate",
+                            "type": "text"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Images",
+            "structure": [
+                {
+                    "name": "Type",
+                    "type": "text",
+                    "validation": [
+                        "readonly"
+                    ]
+                },
+                {
+                    "name": "Order",
+                    "type": "text",
+                    "validation": [
+                        "readonly"
+                    ]
+                },
+                {
+                    "name": "Image",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "name": "ImageType",
+            "structure": [
+                {
+                    "name": "Name",
+                    "type": "text",
+                    "validation": [
+                        "readonly"
+                    ]
+                },
+                {
+                    "name": "Order",
+                    "type": "text",
+                    "validation": [
+                        "readonly"
+                    ]
+                },
+                {
+                    "name": "Image",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "name": "Result",
+            "structure": [
+                {
+                    "name": "Date",
+                    "type": "text",
+                    "validation": [
+                        "readonly"
+                    ]
+                },
+                {
+                    "name": "Order",
+                    "type": "text",
+                    "validation": [
+                        "readonly"
+                    ]
+                },
+                {
+                    "name": "Type",
+                    "type": "select",
+                    "isfromdb": "false",
+                    "option": [
+                        {
+                            "value": "daily",
+                            "name": "Daily"
+                        },
+                        {
+                            "value": "3day",
+                            "name": "3 Days"
+                        },
+                        {
+                            "value": "5day",
+                            "name": "5 Days"
+                        },
+                        {
+                            "value": "10day",
+                            "name": "10 Days"
+                        }
+                    ]
+                },
+                {
+                    "name": "Standings",
+                    "type": "array",
+                    "structure": [
+                        {
+                            "name": "UserId",
+                            "type": "text"
+                        },
+                        {
+                            "name": "Rank",
+                            "type": "text"
+                        },
+                        {
+                            "name": "Points",
+                            "type": "text"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

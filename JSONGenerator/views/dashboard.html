@@ -1,0 +1,36 @@
+<div>
+    <h2 class="title">
+</h2>
+    <div class="page">
+
+        <div class="row">
+            <div class="col-md-12">
+                <section class="panel panel-default" style="border-radius:0px;">
+                    <div class="panel-heading panel-hdr"><span class="glyphicon glyphicon-th mr5"></span>JSON Generator
+                    </div>
+                    <div class="panel-body">
+                        <!--                        <form name="form_constraints" class="form-validation" data-ng-submit="submitForm()">-->
+                        <div class='form-group'>
+                            <label>Project Path</label>
+                            <input type='text' class='form-control' ng-model='json.path' placeholder='Project Path' required> </div>
+                        <div class='form-group'>
+                            <label>Project Name</label>
+                            <input type='text' class='form-control' ng-model='json.projectname' placeholder='Project Name' required>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary all-btn" ng-click="openNext();">Create Model</button>
+                        </div>
+                        <div class="scroll">
+                            <pre>{{jsontext | json}}</pre>
+                        </div>
+                        <!--Add New Tags-->
+                        <div class="text-center" style="padding-bottom:20px;">
+                            <button type="submit" class="btn btn-primary all-btn" ng-click="submitForm();">Submit</button>
+                        </div>
+                        <!--                        </form>-->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

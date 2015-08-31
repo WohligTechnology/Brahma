@@ -1,0 +1,67 @@
+{
+    "models": [
+        {
+            "structure": [
+                {
+                    "order": "1",
+                    "name": "name",
+                    "type": "text",
+                    "validation": [
+            "required"
+          ]
+        },
+                {
+                    "order": "2",
+                    "name": "email",
+                    "type": "email",
+                    "validation": ""
+        },
+                {
+                    "order": "4",
+                    "name": "Gender",
+                    "type": "select",
+                    "isfromdb": "false",
+                    "api": "",
+                    "option": [
+                        {
+                            "value": "male",
+                            "name": "Male"
+            },
+                        {
+                            "value": "female",
+                            "name": "Female"
+            }
+          ]
+        },
+                {
+                    "order": "3",
+                    "name": "tag",
+                    "api": "tag",
+                    "type": "uiselect"
+        },
+                {
+                    "order": "5",
+                    "name": "person",
+                    "api": "person",
+                    "type": "uiselect"
+        },
+                {
+                    "order": "6",
+                    "name": "Gallery",
+                    "structure": [
+                        {
+                            "name": "name",
+                            "type": "text"
+            },
+                        {
+                            "name": "type",
+                            "type": "text"
+            }
+          ],
+                    "type": "array"
+        }
+      ],
+            "name": "User"
+    }
+  ]
+}

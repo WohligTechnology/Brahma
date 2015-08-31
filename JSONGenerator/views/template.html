@@ -1,0 +1,36 @@
+    <div class="container-fluid">
+   <div class="row templatemain header">
+       <div class="col-md-12">
+           <div ng-include="template.header" class="template header"></div>
+       </div>
+   </div>
+    <div class="row templatemain maincontent" ng-if="template.list">
+        <div class="col-md-3 templatemain menu" style="margin-top:-3px;">
+            <div ng-include="template.menu" class="template menu"></div>
+        </div>    
+        <div class="col-md-6 templatemain content">
+            <div ng-include="template.content" class="template content"></div>
+        </div>       
+        <div class="col-md-3 templatemain content" style="  margin-top: 10px; padding-left: 3px;">
+            <div ng-include="template.submenu" class="template content"></div>
+        </div>    
+    </div>
+    <div class="row templatemain maincontent" ng-if="!template.list">
+        <div class="col-md-1 templatemain menu" style="margin-top:-3px;">
+<!--            <div ng-include="template.menu" class="template menu"></div>-->
+        </div>    
+        <div class="col-md-10 templatemain content">
+            <div ng-include="template.content" class="template content"></div>
+        </div>
+        <div class="col-md-1 templatemain menu" style="margin-top:-3px;">
+<!--            <div ng-include="template.menu" class="template menu"></div>-->
+        </div>   
+    </div>
+    <div class="row templatemain footer">
+        <div class="col-md-12">
+            <div ng-include="template.footer" class="template footer"></div>
+        </div>
+    </div>
+</div>
+
+

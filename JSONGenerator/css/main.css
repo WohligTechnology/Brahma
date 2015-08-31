@@ -1,0 +1,390 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,100italic,300italic,400italic);
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+a {
+    color: #C44639;
+}
+
+a:hover {
+    color: #9C3D34;
+}
+
+.form-control:focus {
+    border-color: #C44639;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px #C44639;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px #C44639;
+}
+
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:hover,
+.nav-pills>li.active>a:focus {
+    color: #fff;
+    font-weight: 300;
+    background-color: white;
+    border-radius: 0px;
+    color: rgb(255, 90, 96);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0px;
+}
+
+p {
+    line-height: 180%;
+    font-weight: 300;
+}
+
+.repeated-item.ng-enter,
+.repeated-item.ng-move {
+    -webkit-animation: 0.5s rollIn;
+    -moz-animation: 0.5s rollIn;
+    -o-animation: 0.5s rollIn;
+    animation: 0.5s rollIn;
+}
+
+
+/*
+ The ng-enter-active and ng-move-active
+ are where the transition destination properties
+ are set so that the animation knows what to
+ animate.
+*/
+
+.repeated-item.ng-enter.ng-enter-active,
+.repeated-item.ng-move.ng-move-active {
+    opacity: 1;
+}
+
+
+/*
+  We're using CSS keyframe animations for when
+  the leave event is triggered for the element
+  that has the .repeated-item class
+*/
+
+.repeated-item.ng-leave {
+    -webkit-animation: 1s hinge;
+    -moz-animation: 1s hinge;
+    -o-animation: 1s hinge;
+    animation: 1s hinge;
+    position: absolute;
+}
+
+ul.socialicons {
+    list-style: none;
+    margin-top: -8px;
+}
+
+ul.socialicons li {
+    float: left;
+}
+
+ul.socialicons li i {
+    float: left;
+    font-size: 25px;
+    padding: 5px;
+    color: #C44639;
+}
+
+ul.socialicons li i:hover {
+    float: left;
+    font-size: 25px;
+    padding: 5px;
+    color: #9C3D34;
+}
+
+.logo img {
+    height: 70px;
+}
+
+.img {
+    width: 100%;
+}
+
+.template {}
+
+.template.headermenu {
+    background: #E9E7E7;
+    padding: 5px;
+    height: 30px;
+    font-size: 12px;
+    color: #444;
+}
+
+.template.menu {
+    /* background: #ff5a60; */
+    padding: 3px;
+    /* font-size: 12px; */
+    color: #444;
+    margin-top: 10px;
+}
+
+.template.footermenu {
+    background: #E9E7E7;
+    padding: 10px;
+    color: #444;
+}
+
+.template.content {}
+
+.template.footer {
+    /* background: #5C5B5B; */
+    padding: 0;
+    color: #fff;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.template.footermenu ul {
+    list-style: none;
+    padding: 0px;
+}
+
+.template.footermenu ul li a {
+    color: #444;
+}
+
+.template.footer a {
+    color: #eee;
+}
+
+.templatemain.header {
+    background-color: #FFFFFF;
+    border-bottom: 3px solid #ff5a60;
+}
+
+.templatemain.maincontent {
+    /* background-color: #F6F6F6; */
+    /* border-bottom: 3px solid #ff5a60; */
+}
+
+.templatemain.menu {
+    /*
+    background-color: #ff5a60;
+    border-right: 3px solid #fff;
+*/
+    min-height: 510px;
+}
+
+.templatemain.footer {
+    background-color: #ff5a60;
+}
+
+.menu a {
+    color: white;
+    font-weight: 300;
+}
+
+.menu .list-group-item {
+    color: white;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+}
+
+.nav>li>a:hover,
+.nav>li>a:focus {
+    text-decoration: none;
+    background-color: #FFF;
+    border-radius: 0px;
+    color: #ff5a60;
+}
+
+a.logo p {
+    color: #ff5a60;
+    font-size: 30px;
+    font-weight: 300;
+}
+
+a.logo:hover {
+    color: #fff;
+    font-size: 26px;
+    text-decoration: none;
+}
+
+.templatemain.footer {
+    background-color: #ff5a60;
+    /*    border-top: 3px solid #fff;*/
+}
+
+body {
+    font-family: "Lato";
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: rgb(141, 141, 141);
+    background-color: #fff;
+}
+
+.create-btn {
+    padding: 6px 12px;
+    margin-bottom: 3px;
+}
+
+.mr5 {
+    margin-right: 5px;
+}
+
+.logout {
+    padding: 9px 32px;
+    font-weight: 300;
+    border: 1px solid #ff5a60;
+    background-color: #fff;
+    border-radius: 0px;
+    color: #ff5a60;
+    margin-top: 10px;
+    -webkit-transition: all 1s;
+}
+
+.logout:hover {
+    color: white;
+    background-color: #ff5a60;
+    border-color: #fff;
+}
+
+.all-btn {
+    background-color: #fff;
+    border-radius: 0;
+    color: #FF5A60;
+    border: 1px solid #FF5A60;
+    -webkit-transition: all 1s;
+}
+
+.all-btn:hover {
+    color: #fff;
+    background-color: #FF5A60;
+    border: 1px solid #FF5A60;
+    /* -webkit-transition: all 1s; */
+}
+
+.all-btn:active,
+.all-btn:focus {
+    background-color: #FF5A60;
+    border-color: #FF5A60;
+    color: #fff;
+    border: 1px solid #FF5A60;
+    outline: none;
+}
+
+.panel-default>.panel-hdr {
+    color: #fff;
+    background-color: #FF5A60;
+    border-color: #FF5A60;
+}
+
+.search-box input[type=search] {
+    padding: 6px 5px;
+    border: 1px solid #FF5A60;
+}
+
+.search-box input[type=search]:focus {
+    outline: none;
+}
+
+.all-btn .badge {
+    color: #fff;
+    background-color: #FF5A60;
+    border: 1px solid #FF5A60;
+}
+
+.all-btn:hover .badge {
+    color: #FF5A60;
+    background-color: #fff;
+    border: 1px solid #fff;
+}
+
+.box {
+    padding: 0;
+    border: 1px solid #FF5A60;
+    color: #FF5A60;
+}
+
+.box .icon {
+    background: #FF5A60;
+    font-size: 41px;
+    color: white;
+    text-align: center;
+    padding: 40px 0;
+}
+
+.box .text {
+    padding: 10px;
+}
+
+.box h3 {
+    font-size: 50px;
+    font-weight: 100;
+    text-align: center;
+}
+
+.box p {
+    text-align: center;
+    font-weight: 500;
+    text-align: center;
+}
+
+.panel-default {
+    border-color: #FF5A60;
+}
+
+.table>thead>tr>th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+    color: #444;
+}
+
+.table-bordered>thead>tr>th,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>tbody>tr>td,
+.table-bordered>tfoot>tr>td {
+    border: 1px solid #FF5A60;
+}
+
+.table-bordered {
+    border: 1px solid #FF5A60;
+}
+
+label {
+    color: #444;
+}
+
+.withborder {
+    border: lightgrey;
+    border-style: solid;
+    border-width: 1px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.scroll {
+   height: 300px;
+    
+   background: white;
+   overflow-y: scroll;
+   border: 1px solid #CCCCCC;
+   padding: 10px;
+   margin-bottom: 10px;
+   margin-top: 10px;
+}
+.scroll::-webkit-scrollbar {
+    width: 12px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}

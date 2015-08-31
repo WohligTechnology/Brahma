@@ -1,0 +1,86 @@
+<div>
+    <h2 class="title">
+</h2>
+    <div class="page">
+
+        <div class="row">
+            <div class="col-md-12">
+                <section class="panel panel-default" style="border-radius:0px;">
+                    <div class="panel-heading panel-hdr"><span class="glyphicon glyphicon-th mr5"></span>JSON Generator
+                    </div>
+                    <div class="panel-body">
+                        <!--                        <form name="form_constraints" class="form-validation" data-ng-submit="submitForm()">-->
+
+                        <div class='form-group'>
+                            <label>Page Name</label>
+                            <input type='text' class='form-control' ng-model='json.pagename' placeholder='Page Name'>
+                        </div>
+                        <div class="withborder">
+                            <array objval='DefaultStructure' label='Elements : radio and checkbox not Allowed.' editval='json.default'></array>
+                        </div>
+                        <div class="withborder">
+                            <array objval='UiSelect' label='Elements : UiSelect.' editval='json.uiselect'></array>
+                        </div>
+                        <label>Select</label>
+                        <div class="withborder">
+                            <div ng-repeat="sel in json.select track by $index">
+                                <hr ng-if=$index!=0 style="border-top: 2px solid #5CB85C;">
+                                <div class="form-group">
+                                    <button class="btn btn-primary all-btn" style="float:right" ng-click="deleteSelect($index)">Delete</button>
+                                    <br>
+                                    <label>Order</label>
+                                    <input type='text' class='form-control' ng-model="sel.order" placeholder='Order'>
+                                </div>
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type='text' class='form-control' ng-model='sel.name' placeholder='Name'>
+                                </div>
+                                <div class="form-group">
+                                    <label>Is From Database</label>
+                                    <select class='form-control' ng-model="sel.isfromdb">
+                                        <option value="">Please Select</option>
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" ng-if="sel.isfromdb=='true'">
+                                    <label>Api Name</label>
+                                    <input type='text' class='form-control' ng-model='sel.api' placeholder='Api Name'>
+                                </div>
+                                <array objval='SelectOptionStructure' label='Options' editval='sel.option' ng-if="sel.isfromdb=='false'"></array>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-primary all-btn" ng-click="addSelect()">Add Select</button>
+                            </div>
+                        </div>
+                        <label>Array</label>
+                        <div class="withborder">
+                            <div ng-repeat="sel in json.array track by $index">
+                                <hr ng-if=$index!=0 style="border-top: 2px solid #5CB85C;">
+                                <div class="form-group">
+                                    <button class="btn btn-primary all-btn" style="float:right" ng-click="deleteArray($index)">Delete</button>
+                                    <br>
+                                    <label>Order</label>
+                                    <input type='text' class='form-control' ng-model="sel.order" placeholder='Order'>
+                                </div>
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type='text' class='form-control' ng-model='sel.name' placeholder='Name'>
+                                </div>
+                                <array objval='ArrayStructure' label='Array Structure' editval='sel.structure'></array>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-primary all-btn" ng-click="addArray()">Add Array</button>
+                            </div>
+                        </div>
+                        <!--Add New Tags-->
+                        <div class="text-center" style="padding-bottom:20px;">
+                            <button type="submit" class="btn btn-primary all-btn" ng-click="submitForm()">Submit</button>
+                        </div>
+                        <!--                        </form>-->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
