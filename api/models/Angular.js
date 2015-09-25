@@ -551,7 +551,7 @@ function makesailsproj(data) {
                                 var somecontdata = data.split("Feed.").join(sails._.capitalize(m.name) + ".");
                                 makearraycontrol.write(somecontdata);
                             });
-                        } else if (m.type == "uiselect" && m.isfromdb == "true") {
+                        } else if (m.type == "uiselect") {
                             var nameindex = _.findIndex(mymodel, function (chr) {
                                 return chr.name == m.api;
                             });
