@@ -12,31 +12,28 @@ module.exports = {
         basepath = data.path + "/" + data.projectname + "/";
         projname = data.projectname + "Node";
         baseurl = sails.path.normalize(data.path) + "/" + data.projectname + "Node";
-        //        makesailsproj(data);
+        makesailsproj(data);
 
-        var jsontoparse = data.models;
+        //        var jsontoparse = data.models;
         //        addService(data);
         //        addPath(data);
-        _.each(jsontoparse, function (n) {
-            addViews(n);
-        });
-
-        //        sails.simpleGit.clone('https://github.com/WohligTechnology/BackSpace.git', basepath, function (err) {
-        //            if (err) {
-        //                console.log(err);
-        //                callback(err);
-        //            } else {
-        //                var jsontoparse = data.models;
-        //                addService(data);
-        //                addPath(data);
-        //                _.each(jsontoparse, function (n) {
-        //                    addViews(n);
-        //                });
-        //                //                callback({
-        //                //                    value: "true"
-        //                //                });
-        //            }
+        //        _.each(jsontoparse, function (n) {
+        //            addViews(n);
         //        });
+
+        sails.simpleGit.clone('https://github.com/WohligTechnology/BackSpace.git', basepath, function (err) {
+            if (err) {
+                console.log(err);
+                callback(err);
+            } else {
+                var jsontoparse = data.models;
+                addService(data);
+                addPath(data);
+                _.each(jsontoparse, function (n) {
+                    addViews(n);
+                });
+            }
+        });
     },
     addelements: function (data, callback) {
         var tagdata = "";
@@ -78,7 +75,7 @@ function addHTMLTags(page) {
 
         case "uiselect":
             {
-                tagdata += "<div class='form-group ui-selecter'><label for='exampleInputEmail1'>Select " + sails._.capitalize(n.name) + "</label><div class='form-group'><ui-select multiple tagging tagging-label='false' ng-model = '" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' on-select='ismatch(" + page.name.toLowerCase() + "." + n.name.toLowerCase() + ",$select);'><ui-select-match placeholder='Select " + sails._.capitalize(n.name) + "'>{{$item.name}}</ui-select-match><ui-select-choices repeat='person in " + n.name.toLowerCase() + " track by person._id' refresh='refresh" + sails._.capitalize(n.name) + "($select.search,$select.selected)' refresh-delay='0'><div ng-bind-html='person.name'></div></ui-select-choices></ui-select></div></div>";
+                tagdata += "<div class='form-group ui-selecter'><label for='exampleInputEmail1'>Select " + sails._.capitalize(n.name) + "</label><div class='form-group'><ui-select multiple tagging tagging-label='false' ng-model = '" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' on-select='ismatch" + sails._.capitalize(sails._.camelCase(n.name)) + "(" + page.name.toLowerCase() + "." + n.name.toLowerCase() + ",$select);'><ui-select-match placeholder='Select " + sails._.capitalize(n.name) + "'>{{$item.name}}</ui-select-match><ui-select-choices repeat='person in " + n.name.toLowerCase() + " track by person._id' refresh='refresh" + sails._.capitalize(n.name) + "($select.search,$select.selected)' refresh-delay='0'><div ng-bind-html='person.name'></div></ui-select-choices></ui-select></div></div>";
                 break;
             }
         case "select":
@@ -147,7 +144,6 @@ function addPath(Path) {
             if (merge != "") {
                 tagdata = tagdata + "//Add New Path";
                 tagdata = merge[0] + tagdata + merge[1];
-                console.log(tagdata);
                 var ctrlpath = sails.fs.createWriteStream(ctrl);
                 ctrlpath.write(tagdata);
             }
@@ -282,7 +278,7 @@ function getControllerData(data, n, fromdata, state) {
         switch (m.type) {
         case "uiselect":
             {
-                tagdata += "$scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + " = [];$scope.ismatch = function (data, select) {_.each(data, function (l, key) {if (typeof l == 'string') {";
+                tagdata += "$scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + " = [];$scope.ismatch" + sails._.capitalize(sails._.camelCase(m.name)) + " = function (data, select) {_.each(data, function (l, key) {if (typeof l == 'string') {";
                 if (m.structure != '') {
                     tagdata += "var item = {";
                     _.each(m.structure, function (o) {
@@ -365,8 +361,6 @@ function addService(service) {
     var merge = "";
     var mergeservice = "";
     var mergeleft = "";
-    console.log("*()))))))");
-    console.log(basepath);
     var ctrl = basepath + "/js/controllers.js";
     var serv = basepath + "/js/navigation.js";
     sails.fs.readFile(basepath + "/js/controllers.js", 'utf8', function (err, data) {
@@ -376,7 +370,7 @@ function addService(service) {
             var splitdata = updowndata.split("//Add New Controller");
             tagdata = "";
             _.each(service.models, function (n) {
-                tagdata += "//" + sails._.capitalize(n.name) + " Controller\nphonecatControllers.controller('" + sails._.capitalize(n.name) + "Ctrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {$scope.template = TemplateService;$scope.menutitle =NavigationService.makeactive('" + sails._.capitalize(n.name) + "');TemplateService.title = $scope.menutitle;TemplateService.submenu = '';TemplateService.content = 'views/" + n.name + ".html';TemplateService.list = 2;$scope.navigation = NavigationService.getnav();$scope." + n.name + " = [];$scope.pagedata = {};$scope.pagedata.page = 1;$scope.pagedata.limit = '20';$scope.pagedata.search = '';$scope.number = 100;$scope.reload = function (pagedata) {$scope.pagedata = pagedata;NavigationService.findLimited" + sails._.capitalize(n.name) + "($scope.pagedata, function (data, status) {$scope." + n.name.toLowerCase() + " = data;$scope.pages = [];var newclass = '';for (var i = 1; i <= data.totalpages; i++) {if (pagedata.page == i) {newclass = 'active';} else {newclass = '';}$scope.pages.push({pageno: i,class: newclass});}});}$scope.reload($scope.pagedata);$scope.confDelete = function() {NavigationService.delete" + sails._.capitalize(n.name) + "(function(data, status) {ngDialog.close();window.location.reload();});}$scope.deletefun = function(id) {$.jStorage.set('delete" + n.name.toLowerCase() + "', id);ngDialog.open({template: 'views/delete.html',closeByEscape: false,controller: '" + sails._.capitalize(n.name) + "',closeByDocument: false});}\n//End " + sails._.capitalize(n.name) + "\n});\n//" + n.name.toLowerCase() + " Controller\n";
+                tagdata += "//" + sails._.capitalize(n.name) + " Controller\nphonecatControllers.controller('" + sails._.capitalize(n.name) + "Ctrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {$scope.template = TemplateService;$scope.menutitle =NavigationService.makeactive('" + sails._.capitalize(n.name) + "');TemplateService.title = $scope.menutitle;TemplateService.submenu = '';TemplateService.content = 'views/" + n.name.toLowerCase() + ".html';TemplateService.list = 2;$scope.navigation = NavigationService.getnav();$scope." + n.name + " = [];$scope.pagedata = {};$scope.pagedata.page = 1;$scope.pagedata.limit = '20';$scope.pagedata.search = '';$scope.number = 100;$scope.reload = function (pagedata) {$scope.pagedata = pagedata;NavigationService.findLimited" + sails._.capitalize(n.name) + "($scope.pagedata, function (data, status) {$scope." + n.name.toLowerCase() + " = data;$scope.pages = [];var newclass = '';for (var i = 1; i <= data.totalpages; i++) {if (pagedata.page == i) {newclass = 'active';} else {newclass = '';}$scope.pages.push({pageno: i,class: newclass});}});}$scope.reload($scope.pagedata);$scope.confDelete = function() {NavigationService.delete" + sails._.capitalize(n.name) + "(function(data, status) {ngDialog.close();window.location.reload();});}$scope.deletefun = function(id) {$.jStorage.set('delete" + n.name.toLowerCase() + "', id);ngDialog.open({template: 'views/delete.html',closeByEscape: false,controller: '" + sails._.capitalize(n.name) + "',closeByDocument: false});}\n//End " + sails._.capitalize(n.name) + "\n});\n//" + n.name.toLowerCase() + " Controller\n";
 
                 tagdata += getControllerData("create", n, "", "");
                 tagdata += getControllerData("edit", n, "", "");
@@ -472,6 +466,7 @@ function addViews(page) {
             sails.fs.readFile('./readfiles/order.html', 'utf8', function (err, data) {
                 if (err) throw err;
                 if (data) {
+                    console.log(page.name);
                     var filedata = data.replace("Show Order", "Show " + sails._.capitalize(page.name));
                     filedata = filedata.replace("createorder", "create" + page.name.toLowerCase());
                     filedata = filedata.replace("Create Order", "Create " + sails._.capitalize(page.name));
@@ -631,7 +626,6 @@ function makesailsproj(data) {
             });
             var jsonpath = baseurl + '/package.json';
             sails.fs.readFile('./readfiles/CreateOPackage.txt', 'utf8', function (err, data4) {
-                console.log(data4);
                 var jsondata = data4.split("CreateONode").join(projname);
                 var jsonfile = sails.fs.createWriteStream(jsonpath);
                 jsonfile.write(jsondata);
