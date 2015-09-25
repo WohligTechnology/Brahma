@@ -665,6 +665,11 @@ function makesailsproj(data) {
                 var jsonfile = sails.fs.createWriteStream(jsonpath);
                 jsonfile.write(jsondata);
             });
+            var startpath = baseurl + '/start.bat';
+            sails.fs.readFile('./readfiles/CreateOstart.txt', 'utf8', function (err, data4) {
+                var startfile = sails.fs.createWriteStream(startpath);
+                startfile.write(data4);
+            });
         }
     });
 }
