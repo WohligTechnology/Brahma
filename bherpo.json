@@ -73,7 +73,7 @@
                     "name": "Team",
                     "type": "select",
                     "isfromdb": "true",
-                    "api": "getallteam",
+                    "api": "Team",
                     "option": []
         },
                 {
@@ -81,7 +81,7 @@
                     "name": "Sport",
                     "type": "select",
                     "isfromdb": "true",
-                    "api": "getallsports",
+                    "api": "Sports",
                     "option": []
         },
                 {
@@ -478,7 +478,7 @@
                     "name": "Team",
                     "type": "select",
                     "isfromdb": "true",
-                    "api": "getallteam",
+                    "api": "Team",
                     "option": []
         }
       ],

@@ -11,12 +11,15 @@ phonecatControllers.controller('home', function ($scope, TemplateService, Naviga
     $scope.json = {};
 
     $scope.jsontext = NavigationService.getJson();
-    console.log($scope.jsontext);
     if ($scope.jsontext != null) {
         _.each($scope.jsontext.models, function (n) {
+            _.each(n.structure, function (m) {
+                m.order = parseInt(m.order);
+            });
             n.structure = _.sortByOrder(n.structure, ['order'], ['asc']);
         });
         $scope.json = $scope.jsontext;
+        console.log($scope.json);
     }
 
     $scope.submitForm = function () {
