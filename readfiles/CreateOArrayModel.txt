@@ -1,6 +1,6 @@
 module.exports = {
-    save: function (data, callback) {
-        sails.query(function (err, db) {
+    save: function(data, callback) {
+        sails.query(function(err, db) {
             if (err) {
                 console.log(err);
                 callback({
@@ -8,110 +8,17 @@ module.exports = {
                 });
             }
             if (db) {
-                if (data.user && sails.ObjectID.isValid(data.user)) {
-                    var user = sails.ObjectID(data.user);
-                    delete data.user;
-                    if (!data._id) {
-                        data._id = sails.ObjectID();
-                        db.collection("user").update({
-                            _id: user
-                        }, {
-                            $push: {
-                                feed: data
-                            }
-                        }, function (err, updated) {
-                            if (err) {
-                                console.log(err);
-                                callback({
-                                    value: false
-                                });
-                                db.close();
-                            } else if (updated) {
-                                callback({
-                                    value: true
-                                });
-                                db.close();
-                            } else {
-                                callback({
-                                    value: false,
-                                    comment: "No Such feed"
-                                });
-                                db.close();
-                            }
-                        });
-                    } else {
-                        if (data._id && sails.ObjectID.isValid(data._id)) {
-                            data._id = sails.ObjectID(data._id);
-                            var tobechanged = {};
-                            var attribute = "feed.$.";
-                            _.forIn(data, function (value, key) {
-                                tobechanged[attribute + key] = value;
-                            });
-                            db.collection("user").update({
-                                "_id": user,
-                                "feed._id": data._id
-                            }, {
-                                $set: tobechanged
-                            }, function (err, updated) {
-                                if (err) {
-                                    console.log(err);
-                                    callback({
-                                        value: false
-                                    });
-                                    db.close();
-                                } else if (updated) {
-                                    callback({
-                                        value: true
-                                    });
-                                    db.close();
-                                } else {
-                                    callback({
-                                        value: false,
-                                        comment: "No Such feed"
-                                    });
-                                    db.close();
-                                }
-                            });
-                        } else {
-                            callback({
-                                value: false,
-                                comment: "feedID incorrect."
-                            });
-                            db.close();
-                        }
-                    }
-                } else {
-                    callback({
-                        value: false,
-                        comment: "userID Incorrect"
-                    });
-                    db.close();
-                }
-            }
-        });
-    },
-    delete: function (data, callback) {
-        if (data.user && sails.ObjectID.isValid(data.user) && data._id && sails.ObjectID.isValid(data._id)) {
-            var user = sails.ObjectID(data.user);
-            delete data.user;
-            data._id = sails.ObjectID(data._id);
-            sails.query(function (err, db) {
-                if (err) {
-                    console.log(err);
-                    callback({
-                        value: false
-                    });
-                }
-                if (db) {
+                var user = sails.ObjectID(data.user);
+                delete data.user;
+                if (!data._id) {
+                    data._id = sails.ObjectID();
                     db.collection("user").update({
                         _id: user
                     }, {
-                        $pull: {
-                            "feed": {
-                                "_id": sails.ObjectID(data._id)
-                            }
+                        $push: {
+                            feed: data
                         }
-                    }, function (err, updated) {
+                    }, function(err, updated) {
                         if (err) {
                             console.log(err);
                             callback({
@@ -126,23 +33,93 @@ module.exports = {
                         } else {
                             callback({
                                 value: false,
-                                comment: "No such feed."
+                                comment: "No Such feed"
+                            });
+                            db.close();
+                        }
+                    });
+                } else {
+                    data._id = sails.ObjectID(data._id);
+                    var tobechanged = {};
+                    var attribute = "feed.$.";
+                    _.forIn(data, function(value, key) {
+                        tobechanged[attribute + key] = value;
+                    });
+                    db.collection("user").update({
+                        "_id": user,
+                        "feed._id": data._id
+                    }, {
+                        $set: tobechanged
+                    }, function(err, updated) {
+                        if (err) {
+                            console.log(err);
+                            callback({
+                                value: false
+                            });
+                            db.close();
+                        } else if (updated) {
+                            callback({
+                                value: true
+                            });
+                            db.close();
+                        } else {
+                            callback({
+                                value: false,
+                                comment: "No Such feed"
                             });
                             db.close();
                         }
                     });
                 }
-            });
-        } else {
-            callback({
-                value: false,
-                comment: "userid or feedid incorrect."
-            });
-        }
+            }
+        });
+    },
+    delete: function(data, callback) {
+        var user = sails.ObjectID(data.user);
+        delete data.user;
+        data._id = sails.ObjectID(data._id);
+        sails.query(function(err, db) {
+            if (err) {
+                console.log(err);
+                callback({
+                    value: false
+                });
+            }
+            if (db) {
+                db.collection("user").update({
+                    _id: user
+                }, {
+                    $pull: {
+                        "feed": {
+                            "_id": sails.ObjectID(data._id)
+                        }
+                    }
+                }, function(err, updated) {
+                    if (err) {
+                        console.log(err);
+                        callback({
+                            value: false
+                        });
+                        db.close();
+                    } else if (updated) {
+                        callback({
+                            value: true
+                        });
+                        db.close();
+                    } else {
+                        callback({
+                            value: false,
+                            comment: "No such feed."
+                        });
+                        db.close();
+                    }
+                });
+            }
+        });
     },
     //Findlimited
-    findlimited: function (data, callback) {
-        sails.query(function (err, db) {
+    findlimited: function(data, callback) {
+        sails.query(function(err, db) {
             if (err) {
                 console.log(err);
                 callback({
@@ -169,9 +146,9 @@ module.exports = {
                                 $regex: check
                             }
                         }
-          }, {
+                    }, {
                         $unwind: "$feed"
-          }, {
+                    }, {
                         $match: {
                             _id: user,
                             "feed.name": {
@@ -181,18 +158,18 @@ module.exports = {
                                 $regex: check
                             }
                         }
-          }, {
+                    }, {
                         $group: {
                             _id: user,
                             count: {
                                 $sum: 1
                             }
                         }
-          }, {
+                    }, {
                         $project: {
                             count: 1
                         }
-          }]).toArray(function (err, result) {
+                    }]).toArray(function(err, result) {
                         if (result && result[0]) {
                             newreturns.total = result[0].count;
                             newreturns.totalpages = Math.ceil(result[0].count / data.pagesize);
@@ -223,9 +200,9 @@ module.exports = {
                                     $regex: check
                                 }
                             }
-          }, {
+                        }, {
                             $unwind: "$feed"
-          }, {
+                        }, {
                             $match: {
                                 _id: user,
                                 "feed.name": {
@@ -235,11 +212,11 @@ module.exports = {
                                     $regex: check
                                 }
                             }
-          }, {
+                        }, {
                             $project: {
                                 feed: 1
                             }
-          }]).skip(pagesize * (pagenumber - 1)).limit(pagesize).toArray(function (err, found) {
+                        }]).skip(pagesize * (pagenumber - 1)).limit(pagesize).toArray(function(err, found) {
                             if (found && found[0]) {
                                 newreturns.data = found;
                                 callback(newreturns);
@@ -264,103 +241,89 @@ module.exports = {
         });
     },
     //Findlimited
-    findone: function (data, callback) {
-        if (data.user && sails.ObjectID.isValid(data.user) && data._id && sails.ObjectID.isValid(data._id)) {
-            var user = sails.ObjectID(data.user);
-            sails.query(function (err, db) {
-                if (err) {
-                    console.log(err);
-                    callback({
-                        value: false
-                    });
-                }
-                if (db) {
-                    db.collection("user").find({
-                        _id: user,
-                        "feed._id": sails.ObjectID(data._id)
-                    }, {
-                        "feed.$": 1
-                    }).toArray(function (err, data2) {
-                        if (data2 && data2[0] && data2[0].feed && data2[0].feed[0]) {
-                            callback(data2[0].feed[0]);
-                            db.close();
-                        } else if (err) {
-                            console.log(err);
-                            callback({
-                                value: false
-                            });
-                            db.close();
-                        } else {
-                            callback({
-                                value: false,
-                                comment: "No Such feed."
-                            });
-                            db.close();
-                        }
-                    });
-                }
-            });
-        } else {
-            callback({
-                value: false,
-                comment: "userid or feedid incorrect."
-            });
-        }
+    findone: function(data, callback) {
+        var user = sails.ObjectID(data.user);
+        sails.query(function(err, db) {
+            if (err) {
+                console.log(err);
+                callback({
+                    value: false
+                });
+            }
+            if (db) {
+                db.collection("user").find({
+                    _id: user,
+                    "feed._id": sails.ObjectID(data._id)
+                }, {
+                    "feed.$": 1
+                }).toArray(function(err, data2) {
+                    if (data2 && data2[0] && data2[0].feed && data2[0].feed[0]) {
+                        callback(data2[0].feed[0]);
+                        db.close();
+                    } else if (err) {
+                        console.log(err);
+                        callback({
+                            value: false
+                        });
+                        db.close();
+                    } else {
+                        callback({
+                            value: false,
+                            comment: "No Such feed."
+                        });
+                        db.close();
+                    }
+                });
+            }
+        });
     },
-    find: function (data, callback) {
-        if (data.user && sails.ObjectID.isValid(data.user)) {
-            var user = sails.ObjectID(data.user);
-            sails.query(function (err, db) {
-                if (err) {
-                    console.log(err);
-                    callback({
-                        value: false
-                    });
-                }
-                if (db) {
-                    db.collection("user").aggregate([{
-                        $match: {
-                            _id: user,
-                            "feed.name": {
-                                $exists: true
-                            }
+    find: function(data, callback) {
+        var user = sails.ObjectID(data.user);
+        sails.query(function(err, db) {
+            if (err) {
+                console.log(err);
+                callback({
+                    value: false
+                });
+            }
+            if (db) {
+                db.collection("user").aggregate([{
+                    $match: {
+                        _id: user,
+                        "feed.name": {
+                            $exists: true
                         }
-        }, {
-                        $unwind: "$feed"
-        }, {
-                        $match: {
-                            "feed.name": {
-                                $exists: true
-                            }
+                    }
+                }, {
+                    $unwind: "$feed"
+                }, {
+                    $match: {
+                        "feed.name": {
+                            $exists: true
                         }
-        }, {
-                        $project: {
-                            feed: 1
-                        }
-        }]).toArray(function (err, data2) {
-                        if (data2 && data2[0] && data2[0].feed && data2[0].feed[0]) {
-                            callback(data2);
-                            db.close();
-                        } else if (err) {
-                            console.log(err);
-                            callback({
-                                value: false
-                            });
-                            db.close();
-                        } else {
-                            callback({
-                                value: false
-                            });
-                            db.close();
-                        }
-                    });
-                }
-            });
-        } else {
-            callback({
-                value: false,
-                comment: "userid Incorrect."
-            });
-        }
+                    }
+                }, {
+                    $project: {
+                        feed: 1
+                    }
+                }]).toArray(function(err, data2) {
+                    if (data2 && data2[0] && data2[0].feed && data2[0].feed[0]) {
+                        callback(data2);
+                        db.close();
+                    } else if (err) {
+                        console.log(err);
+                        callback({
+                            value: false
+                        });
+                        db.close();
+                    } else {
+                        callback({
+                            value: false
+                        });
+                        db.close();
+                    }
+                });
+            }
+        });
     }
 };
