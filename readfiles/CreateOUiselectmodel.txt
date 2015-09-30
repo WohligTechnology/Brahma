@@ -69,7 +69,7 @@ module.exports = {
                         } else {
                             callback({
                                 value: false,
-                                comment: "Not updated"
+                                comment: "No data found"
                             });
                             db.close();
                         }
@@ -139,7 +139,7 @@ module.exports = {
                             } else {
                                 callback({
                                     value: false,
-                                    comment: "Count of null"
+                                    comment: "No data found"
                                 });
                                 db.close();
                             }
@@ -315,7 +315,7 @@ module.exports = {
                 } else {
                     callback({
                         value: false,
-                        comment: "No data found."
+                        comment: "No data found"
                     });
                     db.close();
                 }

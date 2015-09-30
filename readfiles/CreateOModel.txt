@@ -27,7 +27,7 @@ module.exports = {
                         } else {
                             callback({
                                 value: false,
-                                comment: "Error"
+                                comment: "Not created"
                             });
                             db.close();
                         }
@@ -56,7 +56,7 @@ module.exports = {
                         } else {
                             callback({
                                 value: false,
-                                comment: "Error"
+                                comment: "No data found"
                             });
                             db.close();
                         }
@@ -86,7 +86,7 @@ module.exports = {
                     } else {
                         callback({
                             value: false,
-                            comment: "No user found"
+                            comment: "No data found"
                         });
                         db.close();
                     }
@@ -155,7 +155,7 @@ module.exports = {
                             } else {
                                 callback({
                                     value: false,
-                                    comment: "No data found."
+                                    comment: "No data found"
                                 });
                                 db.close();
                             }
@@ -191,7 +191,7 @@ module.exports = {
                     } else {
                         callback({
                             value: false,
-                            comment: "user not found"
+                            comment: "No data found"
                         });
                         db.close();
                     }
@@ -224,7 +224,7 @@ module.exports = {
                 } else {
                     callback({
                         value: false,
-                        comment: "user not found"
+                        comment: "No data found"
                     });
                     db.close();
                 }
