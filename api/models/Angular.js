@@ -279,13 +279,7 @@ function getControllerData(data, n, fromdata, state) {
         case "uiselect":
             {
                 tagdata += "$scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + " = [];$scope.ismatch" + sails._.capitalize(sails._.camelCase(m.name)) + " = function (data, select) {_.each(data, function (l, key) {if (typeof l == 'string') {";
-                if (m.structure != '') {
-                    tagdata += "var item = {";
-                    _.each(m.structure, function (o) {
-                        tagdata += "_id:_.now()," + o + ":_.capitalize(l),";
-                    });
-                    tagdata += "};";
-                }
+                tagdata += "var item = {_id:_.now(),name:_.capitalize(l)};";
                 tagdata += "NavigationService.save" + m.name + "(item, function (data, status) {if (data.value == true) {item._id = data.id;}});select.selected = _.without(select.selected, l);select.selected.push(item);$scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + " = select.selected;}});}$scope.refresh" + sails._.capitalize(m.name) + " = function (search) {$scope." + m.name.toLowerCase() + " = [];if (search) {NavigationService.find" + sails._.capitalize(m.name) + "(search, $scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + ", function (data, status) {if (data.value != false){$scope." + m.name.toLowerCase() + " = data;}});}};";
                 break;
             };
