@@ -1,0 +1,210 @@
+{
+  "path": "C:/xampp/htdocs",
+  "projectname": "SASSBased",
+  "models": [
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Title",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Price",
+          "type": "select",
+          "isfromdb": "false",
+          "api": "",
+          "option": [
+            {
+              "value": "50",
+              "name": "$50"
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "name": "Timeperiod",
+          "type": "select",
+          "isfromdb": "false",
+          "api": "",
+          "option": [
+            {
+              "value": "3months",
+              "name": "3 Months"
+            }
+          ]
+        },
+        {
+          "order": 4,
+          "name": "Description",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 5,
+          "name": "Status",
+          "type": "select",
+          "isfromdb": "false",
+          "api": "",
+          "option": [
+            {
+              "value": "yes",
+              "name": "Yes"
+            },
+            {
+              "value": "no",
+              "name": "No"
+            }
+          ]
+        }
+      ],
+      "name": "Package"
+    },
+    {
+      "structure": []
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Email",
+          "type": "email",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 3,
+          "name": "Password",
+          "type": "password",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 4,
+          "name": "Accesslevel",
+          "type": "select",
+          "isfromdb": "false",
+          "api": "",
+          "option": [
+            {
+              "value": "admin",
+              "name": "Admin"
+            },
+            {
+              "value": "user",
+              "name": "User"
+            }
+          ]
+        },
+        {
+          "order": 5,
+          "name": "Contact",
+          "type": "number",
+          "validation": [
+            "required"
+          ]
+        }
+      ],
+      "name": "User"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Package",
+          "type": "select",
+          "isfromdb": "true",
+          "api": "Package",
+          "option": []
+        },
+        {
+          "order": 2,
+          "name": "User",
+          "type": "select",
+          "isfromdb": "true",
+          "api": "User",
+          "option": []
+        },
+        {
+          "order": 3,
+          "name": "Timestamp",
+          "type": "text",
+          "validation": [
+            "readonly"
+          ]
+        },
+        {
+          "order": 4,
+          "name": "Mode of payment",
+          "type": "select",
+          "isfromdb": "false",
+          "api": "",
+          "option": [
+            {
+              "value": "credit",
+              "name": "Credit Card"
+            },
+            {
+              "value": "debit",
+              "name": "Debit Card"
+            },
+            {
+              "value": "netbank",
+              "name": "Net banking"
+            }
+          ]
+        },
+        {
+          "order": 5,
+          "name": "Status",
+          "type": "select",
+          "isfromdb": "false",
+          "api": "",
+          "option": [
+            {
+              "value": "yes",
+              "name": "Yes"
+            },
+            {
+              "value": "no",
+              "name": "No"
+            }
+          ]
+        },
+        {
+          "order": 6,
+          "name": "Description",
+          "type": "textarea",
+          "validation": ""
+        },
+        {
+          "order": 7,
+          "name": "Coupon Code",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 8,
+          "name": "From Site",
+          "type": "text",
+          "validation": ""
+        }
+      ],
+      "name": "Billinglog"
+    }
+  ]
+}
