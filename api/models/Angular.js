@@ -21,7 +21,7 @@ module.exports = {
         //            addViews(n);
         //        });
 
-        sails.simpleGit.clone('https://github.com/WohligTechnology/BackSpace.git', basepath, function (err) {
+        sails.simpleGit.clone('https://github.com/WohligTechnology/BackSpace.git', basepath, function(err) {
             if (err) {
                 console.log(err);
                 callback(err);
@@ -29,7 +29,7 @@ module.exports = {
                 var jsontoparse = data.models;
                 addService(data);
                 addPath(data);
-                _.each(jsontoparse, function (n) {
+                _.each(jsontoparse, function(n) {
                     addViews(n);
                 });
             }
@@ -224,8 +224,6 @@ function editController(jsondata) {
             }
         }
     });
-
-
 }
 
 function getControllerData(data, n, fromdata, state) {
@@ -315,7 +313,6 @@ function getControllerData(data, n, fromdata, state) {
         }
     }
     return tagdata;
-
 }
 
 function addServiceData(n) {
@@ -419,9 +416,6 @@ function addService(service) {
             }
         }
     });
-
-
-
 }
 
 function addController() {}
