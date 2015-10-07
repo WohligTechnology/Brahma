@@ -510,8 +510,7 @@ function makesailsproj(data) {
                 var makecontrolfile = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(n.name) + "Controller.js");
                 sails.fs.readFile('./readfiles/CreateOController.txt', 'utf8', function (err, data) {
                     if (err) throw err;
-                    var somecontdata = data.split("User.").join(sails._.capitalize(n.name) + ".");
-                    somecontdata = somecontdata.split("User-").join(sails._.capitalize(n.name) + "-");
+                    var somecontdata = data.split("User").join(sails._.capitalize(n.name));
                     somecontdata = somecontdata.split("user").join(n.name.toLowerCase());
                     makecontrolfile.write(somecontdata);
                 });
@@ -538,8 +537,7 @@ function makesailsproj(data) {
                             var makearraycontrol = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(m.name) + "Controller.js");
                             sails.fs.readFile('./readfiles/CreateOArrayController.txt', 'utf8', function (err, data) {
                                 if (err) throw err;
-                                var somecontdata = data.split("Feed.").join(sails._.capitalize(m.name) + ".");
-                                somecontdata = somecontdata.split("Feed-").join(sails._.capitalize(m.name) + "-");
+                                var somecontdata = data.split("Feed").join(sails._.capitalize(m.name));
                                 somecontdata = somecontdata.split("feed").join(m.name.toLowerCase());
                                 makearraycontrol.write(somecontdata);
                             });
@@ -557,8 +555,7 @@ function makesailsproj(data) {
                                 var makecontrolfile = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(m.api) + "Controller.js");
                                 sails.fs.readFile('./readfiles/CreateOUiselectcontroller.txt', 'utf8', function (err, data) {
                                     if (err) throw err;
-                                    var somecontdata = data.split("Theme.").join(sails._.capitalize(m.api) + ".");
-                                    somecontdata = somecontdata.split("Theme-").join(sails._.capitalize(m.api) + "-");
+                                    var somecontdata = data.split("Theme").join(sails._.capitalize(m.api));
                                     somecontdata = somecontdata.split("theme").join(m.api.toLowerCase());
                                     makecontrolfile.write(somecontdata);
                                 });
@@ -577,8 +574,7 @@ function makesailsproj(data) {
                                 var makecontrolfile = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(m.api) + "Controller.js");
                                 sails.fs.readFile('./readfiles/CreateOController.txt', 'utf8', function (err, data) {
                                     if (err) throw err;
-                                    var somecontdata = data.split("User.").join(sails._.capitalize(m.api) + ".");
-                                    somecontdata = somecontdata.split("User-").join(sails._.capitalize(m.api) + "-");
+                                    var somecontdata = data.split("User").join(sails._.capitalize(m.api));
                                     somecontdata = somecontdata.split("user").join(m.api.toLowerCase());
                                     makecontrolfile.write(somecontdata);
                                 });
