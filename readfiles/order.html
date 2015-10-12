@@ -2,7 +2,6 @@
     <h2 class="title">
 </h2>
     <div class="page">
-
         <div class="row">
             <div class="col-md-12">
                 <section class="panel panel-default" style="border-radius:0px;">
@@ -13,9 +12,7 @@
                             <input type="search" name="search" ng-model="pagedata.search" placeholder="Search" ng-change="reload(pagedata);" />
                             <a href="#/createorder" class="right btn btn-primary all-btn create-btn">Create Order</a>
                             <div class="pull-right">
-
                                 <select ng-model="pagedata.limit" class="form-control" ng-change="reload({page:'1',limit:pagedata.limit,search:pagedata.search})">
-
                                     <option value="20" selected>20</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
@@ -50,8 +47,9 @@
                                 </ul>
                             </nav>
                         </div>
+                    </div>
                 </section>
-                </div>
             </div>
         </div>
     </div>
+</div>
