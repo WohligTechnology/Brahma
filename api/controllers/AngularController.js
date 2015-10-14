@@ -15,5 +15,8 @@ module.exports = {
         Angular.addelements(req.body, function (data) {
             res.json(data);
         })
+    },
+    currentTime: function(req, res) {
+        res.json(new Date());
     }
 };
