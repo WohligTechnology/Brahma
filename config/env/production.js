@@ -25,7 +25,8 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  // port: 80,
+  port: 82,
+  host:"119.18.48.125:81/"
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *

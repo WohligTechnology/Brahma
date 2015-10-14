@@ -1,0 +1,238 @@
+{
+  "path": "C:\\xampp\\htdocs\\",
+  "projectname": "Creator",
+  "models": [
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Content",
+          "type": "textarea",
+          "validation": ""
+        },
+        {
+          "order": 3,
+          "name": "Inner",
+          "structure": [
+            {
+              "name": "Type",
+              "type": "text"
+            },
+            {
+              "name": "Key",
+              "type": "text"
+            }
+          ],
+          "type": "array"
+        },
+        {
+          "order": 4,
+          "name": "Style",
+          "structure": [
+            {
+              "name": "Name",
+              "type": "text"
+            },
+            {
+              "name": "Value",
+              "type": "text"
+            }
+          ],
+          "type": "array"
+        },
+        {
+          "order": 5,
+          "name": "Class",
+          "structure": [
+            {
+              "name": "Name",
+              "type": "text"
+            }
+          ],
+          "type": "array"
+        },
+        {
+          "order": 6,
+          "name": "Event",
+          "structure": [
+            {
+              "name": "Type",
+              "type": "text"
+            },
+            {
+              "name": "Function",
+              "type": "text"
+            }
+          ],
+          "type": "array"
+        },
+        {
+          "order": 7,
+          "name": "Category",
+          "structure": [
+            {
+              "name": "Name",
+              "type": "text"
+            }
+          ],
+          "type": "array"
+        },
+        {
+          "order": 8,
+          "name": "Tags",
+          "type": "text",
+          "validation": ""
+        }
+      ],
+      "name": "Container"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Content",
+          "type": "textarea",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Type",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 3,
+          "name": "Style",
+          "structure": [
+            {
+              "name": "Name",
+              "type": "text"
+            },
+            {
+              "name": "Value",
+              "type": "text"
+            }
+          ],
+          "type": "array"
+        },
+        {
+          "order": 4,
+          "name": "Class",
+          "structure": [
+            {
+              "name": "Name",
+              "type": "text"
+            }
+          ],
+          "type": "array"
+        },
+        {
+          "order": 5,
+          "name": "Event",
+          "structure": [
+            {
+              "name": "Type",
+              "type": "text"
+            },
+            {
+              "name": "Function",
+              "type": "text"
+            }
+          ],
+          "type": "array"
+        }
+      ],
+      "name": "Element"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Content",
+          "structure": [
+            {
+              "name": "Name",
+              "type": "text"
+            },
+            {
+              "name": "Value",
+              "type": "text"
+            }
+          ],
+          "type": "array"
+        }
+      ],
+      "name": "Styles"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Pagetype",
+          "type": "select",
+          "isfromdb": "true",
+          "api": "Pagetype",
+          "option": [
+            {
+              "value": "login",
+              "name": "Login Form"
+            }
+          ]
+        },
+        {
+          "order": 3,
+          "name": "ColorCombo",
+          "type": "select",
+          "isfromdb": "true",
+          "api": "Colorcombo",
+          "option": []
+        },
+        {
+          "order": 4,
+          "name": "Font",
+          "type": "select",
+          "isfromdb": "true",
+          "api": "Font",
+          "option": []
+        },
+        {
+          "order": 5,
+          "name": "Styles",
+          "type": "select",
+          "isfromdb": "true",
+          "api": "Styles",
+          "option": []
+        }
+      ],
+      "name": "Project"
+    }
+  ]
+}
