@@ -1,7 +1,7 @@
 /**
- * FeedController
+ * ThemeController
  *
- * @description :: Server-side logic for managing feeds
+ * @description :: Server-side logic for managing themes
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
@@ -9,22 +9,22 @@ module.exports = {
     save: function(req, res) {
         if (req.body._id) {
             if (req.body._id != "" && sails.ObjectID.isValid(req.body._id)) {
-                feed();
+                theme();
             } else {
                 res.json({
                     value: "false",
-                    comment: "Feed-id is incorrect"
+                    comment: "Theme-id is incorrect"
                 });
             }
         } else {
-            feed();
+            theme();
         }
 
-        function feed() {
+        function theme() {
             var print = function(data) {
                 res.json(data);
             }
-            Feed.save(req.body, print);
+            Theme.save(req.body, print);
         }
     },
     delete: function(req, res) {
@@ -32,11 +32,11 @@ module.exports = {
             var print = function(data) {
                 res.json(data);
             }
-            Feed.delete(req.body, print);
+            Theme.delete(req.body, print);
         } else {
             res.json({
                 value: "false",
-                comment: "Feed-id is incorrect"
+                comment: "Theme-id is incorrect"
             });
         }
     },
@@ -44,25 +44,32 @@ module.exports = {
         function callback(data) {
             res.json(data);
         };
-        Feed.find(req.body, callback);
+        Theme.find(req.body, callback);
     },
     findone: function(req, res) {
         if (req.body._id && req.body._id != "" && sails.ObjectID.isValid(req.body._id)) {
             var print = function(data) {
                 res.json(data);
             }
-            Feed.findone(req.body, print);
+            Theme.findone(req.body, print);
         } else {
             res.json({
                 value: "false",
-                comment: "Feed-id is incorrect"
+                comment: "Theme-id is incorrect"
             });
         }
     },
     findlimited: function(req, res) {
-        function callback(data) {
-            res.json(data);
-        };
-        Feed.findlimited(req.body, callback);
+        if (req.body.pagesize && req.body.pagesize != "" && req.body.pagenumber && req.body.pagenumber != "" && req.body.search) {
+            function callback(data) {
+                res.json(data);
+            };
+            Theme.findlimited(req.body, callback);
+        } else {
+            res.json({
+                value: false,
+                comment: "Please provide parameters"
+            });
+        }
     }
 };

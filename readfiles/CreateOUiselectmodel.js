@@ -60,7 +60,7 @@ module.exports = {
                                 value: false
                             });
                             db.close();
-                        }  else if (updated.result.nModified != 0 && updated.result.n != 0) {
+                        } else if (updated.result.nModified != 0 && updated.result.n != 0) {
                             callback({
                                 value: true
                             });
@@ -98,170 +98,124 @@ module.exports = {
                 });
             }
             if (db) {
-                if (data.category != "") {
-                    db.collection("theme").count({
+
+                db.collection("theme").count({
+                    name: {
+                        '$regex': check
+                    }
+                }, function(err, number) {
+                    if (number) {
+                        newreturns.total = number;
+                        newreturns.totalpages = Math.ceil(number / data.pagesize);
+                        callbackfunc1();
+                    } else if (err) {
+                        console.log(err);
+                        callback({
+                            value: false
+                        });
+                        db.close();
+                    } else {
+                        callback({
+                            value: false,
+                            comment: "Count of null"
+                        });
+                        db.close();
+                    }
+                });
+
+                function callbackfunc1() {
+                    db.collection("theme").find({
                         name: {
                             '$regex': check
-                        },
-                        category: data.category
-                    }, function(err, number) {
-                        if (number) {
-                            newreturns.total = number;
-                            newreturns.totalpages = Math.ceil(number / data.pagesize);
-                            callbackfunc();
-                        } else if (err) {
-                            console.log(err);
+                        }
+                    }, {}).skip(pagesize * (pagenumber - 1)).limit(pagesize).toArray(function(err, found) {
+                        if (err) {
                             callback({
                                 value: false
                             });
+                            console.log(err);
+                            db.close();
+                        } else if (found && found[0]) {
+                            newreturns.data = found;
+                            callback(newreturns);
                             db.close();
                         } else {
                             callback({
                                 value: false,
-                                comment: "Count of null"
+                                comment: "No data found"
                             });
                             db.close();
                         }
                     });
-
-                    function callbackfunc() {
-                        db.collection("theme").find({
-                            name: {
-                                '$regex': check
-                            },
-                            category: data.category
-                        }, {}).skip(pagesize * (pagenumber - 1)).limit(pagesize).toArray(function(err, found) {
-                            if (err) {
-                                callback({
-                                    value: false
-                                });
-                                console.log(err);
-                                db.close();
-                            } else if (found && found[0]) {
-                                newreturns.data = found;
-                                callback(newreturns);
-                                db.close();
-                            } else {
-                                callback({
-                                    value: false,
-                                    comment: "No data found"
-                                });
-                                db.close();
-                            }
-                        });
-                    }
-                } else {
-                    db.collection("theme").count({
-                        name: {
-                            '$regex': check
-                        }
-                    }, function(err, number) {
-                        if (number) {
-                            newreturns.total = number;
-                            newreturns.totalpages = Math.ceil(number / data.pagesize);
-                            callbackfunc1();
-                        } else if (err) {
-                            console.log(err);
-                            callback({
-                                value: false
-                            });
-                            db.close();
-                        } else {
-                            callback({
-                                value: false,
-                                comment: "Count of null"
-                            });
-                            db.close();
-                        }
-                    });
-
-                    function callbackfunc1() {
-                        db.collection("theme").find({
-                            name: {
-                                '$regex': check
-                            }
-                        }, {}).skip(pagesize * (pagenumber - 1)).limit(pagesize).toArray(function(err, found) {
-                            if (err) {
-                                callback({
-                                    value: false
-                                });
-                                console.log(err);
-                                db.close();
-                            } else if (found && found[0]) {
-                                newreturns.data = found;
-                                callback(newreturns);
-                                db.close();
-                            } else {
-                                callback({
-                                    value: false,
-                                    comment: "No data found"
-                                });
-                                db.close();
-                            }
-                        });
-                    }
                 }
             }
         });
     },
     find: function(data, callback) {
-        var returns = [];
-        var exit = 0;
-        var exitup = 1;
-        var check = new RegExp(data.search, "i");
+        if (data.search && data.theme) {
+            var returns = [];
+            var exit = 0;
+            var exitup = 1;
+            var check = new RegExp(data.search, "i");
 
-        function callback2(exit, exitup, data) {
-            if (exit == exitup) {
-                callback(data);
+            function callback2(exit, exitup, data) {
+                if (exit == exitup) {
+                    callback(data);
+                }
             }
-        }
-        sails.query(function(err, db) {
-            if (err) {
-                console.log(err);
-                callback({
-                    value: false
-                });
+            sails.query(function(err, db) {
+                if (err) {
+                    console.log(err);
+                    callback({
+                        value: false
+                    });
 
-            }
-            if (db) {
-                db.collection("theme").find({
-                    name: {
-                        '$regex': check
-                    },
-                    category: data.category
-                }).limit(10).toArray(function(err, found) {
-                    if (err) {
-                        callback({
-                            value: false
-                        });
-                        console.log(err);
-                        db.close();
-                    } else if (found != null) {
-                        exit++;
-                        if (data.theme.length != 0) {
-                            var nedata;
-                            nedata = _.remove(found, function(n) {
-                                var flag = false;
-                                _.each(data.theme, function(n1) {
-                                    if (n1.name == n.name) {
-                                        flag = true;
-                                    }
-                                })
-                                return flag;
+                }
+                if (db) {
+                    db.collection("theme").find({
+                        name: {
+                            '$regex': check
+                        },
+                        category: data.category
+                    }).limit(10).toArray(function(err, found) {
+                        if (err) {
+                            callback({
+                                value: false
                             });
+                            console.log(err);
+                            db.close();
+                        } else if (found != null) {
+                            exit++;
+                            if (data.theme.length != 0) {
+                                var nedata;
+                                nedata = _.remove(found, function(n) {
+                                    var flag = false;
+                                    _.each(data.theme, function(n1) {
+                                        if (n1.name == n.name) {
+                                            flag = true;
+                                        }
+                                    })
+                                    return flag;
+                                });
+                            }
+                            returns = returns.concat(found);
+                            callback2(exit, exitup, returns);
+                        } else {
+                            callback({
+                                value: false,
+                                comment: "No data found"
+                            });
+                            db.close();
                         }
-                        returns = returns.concat(found);
-                        callback2(exit, exitup, returns);
-                    } else {
-                        callback({
-                            value: false,
-                            comment: "No data found"
-                        });
-                        db.close();
-                    }
-                });
-            }
-        });
+                    });
+                }
+            });
+        } else {
+            callback({
+                value: false,
+                comment: "Please provide parameters"
+            });
+        }
     },
     findone: function(data, callback) {
         sails.query(function(err, db) {

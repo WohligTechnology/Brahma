@@ -60,9 +60,16 @@ module.exports = {
         }
     },
     findlimited: function(req, res) {
-        function callback(data) {
-            res.json(data);
-        };
-        User.findlimited(req.body, callback);
+        if (req.body.pagesize && req.body.pagesize != "" && req.body.pagenumber && req.body.pagenumber != "" && req.body.search) {
+            function callback(data) {
+                res.json(data);
+            };
+            User.findlimited(req.body, callback);
+        } else {
+            res.json({
+                value: false,
+                comment: "Please provide parameters"
+            });
+        }
     }
 };

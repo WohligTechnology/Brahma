@@ -494,7 +494,7 @@ function makesailsproj(data) {
             console.log(stdout);
             _.each(data.models, function(n) {
                 var makejsfile = sails.fs.createWriteStream(baseurl + "/api/models/" + sails._.capitalize(n.name) + ".js");
-                sails.fs.readFile('./readfiles/CreateOModel.txt', 'utf8', function(err, data) {
+                sails.fs.readFile('./readfiles/CreateOModel.js', 'utf8', function(err, data) {
                     if (err) throw err;
                     var somedata = data.split("user").join(n.name.toLowerCase());
                     var index = _.findIndex(n.structure, function(chr) {
@@ -510,7 +510,7 @@ function makesailsproj(data) {
                     }
                 });
                 var makecontrolfile = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(n.name) + "Controller.js");
-                sails.fs.readFile('./readfiles/CreateOController.txt', 'utf8', function(err, data) {
+                sails.fs.readFile('./readfiles/CreateOController.js', 'utf8', function(err, data) {
                     if (err) throw err;
                     var somecontdata = data.split("User").join(sails._.capitalize(n.name));
                     makecontrolfile.write(somecontdata);
@@ -522,7 +522,7 @@ function makesailsproj(data) {
                             if (apiname == -1) {
                                 newarr.push(m.name);
                                 var makearraymodel = sails.fs.createWriteStream(baseurl + "/api/models/" + sails._.capitalize(m.name) + ".js");
-                                sails.fs.readFile('./readfiles/CreateOArrayModel.txt', 'utf8', function(err, data) {
+                                sails.fs.readFile('./readfiles/CreateOArrayModel.js', 'utf8', function(err, data) {
                                     if (err) throw err;
                                     var somedata = data.split("user").join(n.name.toLowerCase());
                                     somedata = somedata.split("feed").join(m.name.toLowerCase());
@@ -539,7 +539,7 @@ function makesailsproj(data) {
                                     }
                                 });
                                 var makearraycontrol = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(m.name) + "Controller.js");
-                                sails.fs.readFile('./readfiles/CreateOArrayController.txt', 'utf8', function(err, data) {
+                                sails.fs.readFile('./readfiles/CreateOArrayController.js', 'utf8', function(err, data) {
                                     if (err) throw err;
                                     var somecontdata = data.split("Feed").join(sails._.capitalize(m.name));
                                     makearraycontrol.write(somecontdata);
@@ -551,13 +551,13 @@ function makesailsproj(data) {
                             });
                             if (nameindex == -1) {
                                 var makejsfile = sails.fs.createWriteStream(baseurl + "/api/models/" + sails._.capitalize(m.api) + ".js");
-                                sails.fs.readFile('./readfiles/CreateOUiSelectmodel.txt', 'utf8', function(err, data) {
+                                sails.fs.readFile('./readfiles/CreateOUiSelectmodel.js', 'utf8', function(err, data) {
                                     if (err) throw err;
                                     var somedata = data.split("theme").join(m.api.toLowerCase());
                                     makejsfile.write(somedata);
                                 });
                                 var makecontrolfile = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(m.api) + "Controller.js");
-                                sails.fs.readFile('./readfiles/CreateOUiselectcontroller.txt', 'utf8', function(err, data) {
+                                sails.fs.readFile('./readfiles/CreateOUiselectcontroller.js', 'utf8', function(err, data) {
                                     if (err) throw err;
                                     var somecontdata = data.split("Theme").join(sails._.capitalize(m.api));
                                     makecontrolfile.write(somecontdata);
@@ -569,13 +569,13 @@ function makesailsproj(data) {
                             });
                             if (nameindex == -1) {
                                 var makejsfile = sails.fs.createWriteStream(baseurl + "/api/models/" + sails._.capitalize(m.api) + ".js");
-                                sails.fs.readFile('./readfiles/CreateOModel.txt', 'utf8', function(err, data) {
+                                sails.fs.readFile('./readfiles/CreateOModel.js', 'utf8', function(err, data) {
                                     if (err) throw err;
                                     var somedata = data.split("user").join(m.api.toLowerCase());
                                     makejsfile.write(somedata);
                                 });
                                 var makecontrolfile = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(m.api) + "Controller.js");
-                                sails.fs.readFile('./readfiles/CreateOController.txt', 'utf8', function(err, data) {
+                                sails.fs.readFile('./readfiles/CreateOController.js', 'utf8', function(err, data) {
                                     if (err) throw err;
                                     var somecontdata = data.split("User").join(sails._.capitalize(m.api));
                                     makecontrolfile.write(somecontdata);
