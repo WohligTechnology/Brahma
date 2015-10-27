@@ -60,7 +60,7 @@ module.exports = {
         }
     },
     findlimited: function(req, res) {
-        if (req.body.pagesize && req.body.pagesize != "" && req.body.pagenumber && req.body.pagenumber != "" && req.body.search) {
+        if (req.body.pagesize && req.body.pagesize != "" && req.body.pagenumber && req.body.pagenumber != "") {
             function callback(data) {
                 res.json(data);
             };
