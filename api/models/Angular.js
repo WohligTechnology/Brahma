@@ -106,16 +106,32 @@ function addHTMLTags(page) {
                     }
                     break;
                 }
+            case "radio":
+                {
+
+                }
             default:
                 {
-                    tagdata += "<div class='form-group'><label>" + sails._.capitalize(n.name) + "</label><input type='" + n.type + "' class='form-control' ng-model = '" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' placeholder='" + sails._.capitalize(n.name) + "'";
-                    if (n.validation) {
-                        _.each(n.validation, function(m) {
-                            tagdata += " " + m;
-                        })
-                        tagdata += " > </div>";
+                    if (n.type == 'radio' || n.type == 'checkbox') {
+                        tagdata += "<div class='form-group'><label>" + sails._.capitalize(n.name) + "</label><input type='" + n.type + "' name='" + sails._.camelCase(n.name).toLowerCase() + "' class='form-control' ng-model = '" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' placeholder='" + sails._.capitalize(n.name) + "'";
+                        if (n.validation) {
+                            _.each(n.validation, function(m) {
+                                tagdata += " " + m;
+                            })
+                            tagdata += " > </div>";
+                        } else {
+                            tagdata += " > </div>";
+                        }
                     } else {
-                        tagdata += " > </div>";
+                        tagdata += "<div class='form-group'><label>" + sails._.capitalize(n.name) + "</label><input type='" + n.type + "' class='form-control' ng-model = '" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' placeholder='" + sails._.capitalize(n.name) + "'";
+                        if (n.validation) {
+                            _.each(n.validation, function(m) {
+                                tagdata += " " + m;
+                            })
+                            tagdata += " > </div>";
+                        } else {
+                            tagdata += " > </div>";
+                        }
                     }
                     break;
                 }
@@ -542,6 +558,7 @@ function makesailsproj(data) {
                                 sails.fs.readFile('./readfiles/CreateOArrayController.js', 'utf8', function(err, data) {
                                     if (err) throw err;
                                     var somecontdata = data.split("Feed").join(sails._.capitalize(m.name));
+                                    somecontdata = somecontdata.split("user").join(n.name.toLowerCase());
                                     makearraycontrol.write(somecontdata);
                                 });
                             }

@@ -1,6 +1,6 @@
 var phonecatControllers = angular.module('phonecatControllers', ['templateservicemod', 'navigationservice', 'ngDialog']);
 
-phonecatControllers.controller('home', function ($scope, TemplateService, NavigationService, $routeParams, $location) {
+phonecatControllers.controller('home', function($scope, TemplateService, NavigationService, $routeParams, $location) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive("Dashboard");
     TemplateService.title = $scope.menutitle;
@@ -12,8 +12,8 @@ phonecatControllers.controller('home', function ($scope, TemplateService, Naviga
 
     $scope.jsontext = NavigationService.getJson();
     if ($scope.jsontext != null) {
-        _.each($scope.jsontext.models, function (n) {
-            _.each(n.structure, function (m) {
+        _.each($scope.jsontext.models, function(n) {
+            _.each(n.structure, function(m) {
                 m.order = parseInt(m.order);
             });
             n.structure = _.sortByOrder(n.structure, ['order'], ['asc']);
@@ -22,13 +22,13 @@ phonecatControllers.controller('home', function ($scope, TemplateService, Naviga
         console.log($scope.json);
     }
 
-    $scope.submitForm = function () {
-        NavigationService.createproject($scope.jsontext, function (data, status) {
+    $scope.submitForm = function() {
+        NavigationService.createproject($scope.jsontext, function(data, status) {
             console.log(data);
         })
     }
 
-    $scope.openNext = function () {
+    $scope.openNext = function() {
         NavigationService.setJson($scope.json);
         $location.url("/models");
     }
@@ -36,7 +36,7 @@ phonecatControllers.controller('home', function ($scope, TemplateService, Naviga
 
 });
 
-phonecatControllers.controller('models', function ($scope, TemplateService, NavigationService, $routeParams, $location) {
+phonecatControllers.controller('models', function($scope, TemplateService, NavigationService, $routeParams, $location) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive("Dashboard");
     TemplateService.title = $scope.menutitle;
@@ -61,53 +61,54 @@ phonecatControllers.controller('models', function ($scope, TemplateService, Navi
         console.log("no models");
         $scope.jsonpass.models = [];
     }
+
     $scope.DefaultStructure = [{
         "name": "order",
         "type": "text"
-  }, {
+    }, {
         "name": "name",
         "type": "text"
-  }, {
+    }, {
         "name": "type",
         "type": "text"
-  }, {
+    }, {
         "name": "validation",
         "type": "text",
 
-  }];
+    }];
 
     $scope.SelectOptionStructure = [{
         "name": "value",
         "type": "text"
-  }, {
+    }, {
         "name": "name",
         "type": "text"
-  }];
+    }];
 
     $scope.UiSelect = [{
         "name": "order",
         "type": "text"
-  }, {
+    }, {
         "name": "name",
         "type": "text"
-  }, {
+    }, {
         "name": "api",
         "type": "text"
-  }];
+    }];
 
     $scope.ArrayStructure = [{
         "name": "name",
         "type": "text"
-  }, {
+    }, {
         "name": "type",
         "type": "text"
-  }];
+    }];
 
-    $scope.submitForm = function () {
+    $scope.submitForm = function() {
         console.log($scope.json);
     }
 
-    $scope.addSelect = function () {
+    $scope.addSelect = function() {
         $scope.json.select.push({
             "order": "",
             "name": "",
@@ -117,31 +118,31 @@ phonecatControllers.controller('models', function ($scope, TemplateService, Navi
             "option": []
         });
     }
-    $scope.deleteSelect = function (index) {
+    $scope.deleteSelect = function(index) {
         $scope.json.select.splice(index, 1);
     }
 
-    $scope.addArray = function () {
+    $scope.addArray = function() {
         $scope.json.array.push({
             "order": "",
             "name": "",
             "structure": []
         });
     }
-    $scope.deleteArray = function (index) {
+    $scope.deleteArray = function(index) {
         $scope.json.array.splice(index, 1);
     }
 
-    $scope.submitForm = function () {
+    $scope.submitForm = function() {
         $scope.newjson = {};
         $scope.newjson.structure = [];
         $scope.newjson.name = $scope.json.pagename;
-        _.each($scope.json.default, function (n) {
+        _.each($scope.json.default, function(n) {
             if (n.validation)
                 n.validation = n.validation.split(",");
             $scope.newjson.structure.push(n);
         });
-        _.each($scope.json.select, function (n) {
+        _.each($scope.json.select, function(n) {
             if ($scope.json.select.isfromdb == "true")
                 $scope.json.select.isfromdb = true;
             if ($scope.json.select.isfromdb == "false")
@@ -149,12 +150,12 @@ phonecatControllers.controller('models', function ($scope, TemplateService, Navi
             $scope.newjson.structure.push(n);
         });
 
-        _.each($scope.json.uiselect, function (n) {
+        _.each($scope.json.uiselect, function(n) {
             n.type = "uiselect";
             $scope.newjson.structure.push(n);
         });
 
-        _.each($scope.json.array, function (n) {
+        _.each($scope.json.array, function(n) {
             n.type = "array";
             $scope.newjson.structure.push(n);
         });
@@ -167,7 +168,7 @@ phonecatControllers.controller('models', function ($scope, TemplateService, Navi
 });
 
 phonecatControllers.controller('headerctrl', ['$scope', 'TemplateService',
-  function ($scope, TemplateService) {
+    function($scope, TemplateService) {
         $scope.template = TemplateService;
-  }
+    }
 ]);
