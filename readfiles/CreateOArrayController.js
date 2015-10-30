@@ -7,17 +7,24 @@
 
 module.exports = {
     save: function(req, res) {
-        if (req.body._id) {
-            if (req.body._id != "" && sails.ObjectID.isValid(req.body._id)) {
-                feed();
+        if (req.body.user && req.body.user != "" && sails.ObjectID.isValid(req.body.user)) {
+            if (req.body._id) {
+                if (req.body._id != "" && sails.ObjectID.isValid(req.body._id)) {
+                    feed();
+                } else {
+                    res.json({
+                        value: "false",
+                        comment: "Feed-id is incorrect"
+                    });
+                }
             } else {
-                res.json({
-                    value: "false",
-                    comment: "Feed-id is incorrect"
-                });
+                feed();
             }
         } else {
-            feed();
+            res.json({
+                value: "false",
+                comment: "user-id is incorrect "
+            });
         }
 
         function feed() {
@@ -28,47 +35,75 @@ module.exports = {
         }
     },
     delete: function(req, res) {
-        if (req.body._id && req.body._id != "" && sails.ObjectID.isValid(req.body._id)) {
-            var print = function(data) {
-                res.json(data);
+        if (req.body.user && req.body.user != "" && sails.ObjectID.isValid(req.body.user)) {
+            if (req.body._id && req.body._id != "" && sails.ObjectID.isValid(req.body._id)) {
+                var print = function(data) {
+                    res.json(data);
+                }
+                Feed.delete(req.body, print);
+            } else {
+                res.json({
+                    value: "false",
+                    comment: "Feed-id is incorrect"
+                });
             }
-            Feed.delete(req.body, print);
         } else {
             res.json({
                 value: "false",
-                comment: "Feed-id is incorrect"
+                comment: "user-id is incorrect "
             });
         }
     },
     find: function(req, res) {
-        function callback(data) {
-            res.json(data);
-        };
-        Feed.find(req.body, callback);
-    },
-    findone: function(req, res) {
-        if (req.body._id && req.body._id != "" && sails.ObjectID.isValid(req.body._id)) {
-            var print = function(data) {
+        if (req.body.user && req.body.user != "" && sails.ObjectID.isValid(req.body.user)) {
+            function callback(data) {
                 res.json(data);
-            }
-            Feed.findone(req.body, print);
+            };
+            Feed.find(req.body, callback);
         } else {
             res.json({
                 value: "false",
-                comment: "Feed-id is incorrect"
+                comment: "user-id is incorrect "
+            });
+        }
+    },
+    findone: function(req, res) {
+        if (req.body.user && req.body.user != "" && sails.ObjectID.isValid(req.body.user)) {
+            if (req.body._id && req.body._id != "" && sails.ObjectID.isValid(req.body._id)) {
+                var print = function(data) {
+                    res.json(data);
+                }
+                Feed.findone(req.body, print);
+            } else {
+                res.json({
+                    value: "false",
+                    comment: "Feed-id is incorrect"
+                });
+            }
+        } else {
+            res.json({
+                value: "false",
+                comment: "user-id is incorrect "
             });
         }
     },
     findlimited: function(req, res) {
-        if (req.body.pagesize && req.body.pagesize != "" && req.body.pagenumber && req.body.pagenumber != "") {
-            function callback(data) {
-                res.json(data);
-            };
-            Feed.findlimited(req.body, callback);
+        if (req.body.user && req.body.user != "" && sails.ObjectID.isValid(req.body.user)) {
+            if (req.body.pagesize && req.body.pagesize != "" && req.body.pagenumber && req.body.pagenumber != "") {
+                function callback(data) {
+                    res.json(data);
+                };
+                Feed.findlimited(req.body, callback);
+            } else {
+                res.json({
+                    value: false,
+                    comment: "Please provide parameters"
+                });
+            }
         } else {
             res.json({
-                value: false,
-                comment: "Please provide parameters"
+                value: "false",
+                comment: "user-id is incorrect "
             });
         }
     }
