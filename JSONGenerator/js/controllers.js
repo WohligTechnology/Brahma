@@ -52,6 +52,7 @@ phonecatControllers.controller('models', function($scope, TemplateService, Navig
     $scope.newjson.structure = [];
     $scope.jsonpass = {};
     $scope.json.array = [];
+    $scope.json.radiocheck = [];
 
     if ($.jStorage.get("json"))
         $scope.jsonpass = NavigationService.getJson();
@@ -74,7 +75,14 @@ phonecatControllers.controller('models', function($scope, TemplateService, Navig
     }, {
         "name": "validation",
         "type": "text",
+    }];
 
+    $scope.RadioCheckStructure = [{
+        "name": "name",
+        "type": "text"
+    }, {
+        "name": "type",
+        "type": "text"
     }];
 
     $scope.SelectOptionStructure = [{
@@ -104,9 +112,9 @@ phonecatControllers.controller('models', function($scope, TemplateService, Navig
         "type": "text"
     }];
 
-    $scope.submitForm = function() {
-        console.log($scope.json);
-    }
+    // $scope.submitForm = function() {
+    //     console.log($scope.json);
+    // }
 
     $scope.addSelect = function() {
         $scope.json.select.push({
@@ -120,6 +128,17 @@ phonecatControllers.controller('models', function($scope, TemplateService, Navig
     }
     $scope.deleteSelect = function(index) {
         $scope.json.select.splice(index, 1);
+    }
+
+    $scope.addRadioCheck = function() {
+        $scope.json.radiocheck.push({
+            "order": "",
+            "headname": "",
+            "radiocheck": []
+        });
+    }
+    $scope.deleteRadioCheck = function(index) {
+        $scope.json.radiocheck.splice(index, 1);
     }
 
     $scope.addArray = function() {
@@ -137,11 +156,20 @@ phonecatControllers.controller('models', function($scope, TemplateService, Navig
         $scope.newjson = {};
         $scope.newjson.structure = [];
         $scope.newjson.name = $scope.json.pagename;
+
+        console.log($scope.json.radiocheck);
+
         _.each($scope.json.default, function(n) {
             if (n.validation)
                 n.validation = n.validation.split(",");
             $scope.newjson.structure.push(n);
         });
+
+        _.each($scope.json.radiocheck, function(n) {
+            n.type = "radio";
+            $scope.newjson.structure.push(n);
+        });
+
         _.each($scope.json.select, function(n) {
             if ($scope.json.select.isfromdb == "true")
                 $scope.json.select.isfromdb = true;

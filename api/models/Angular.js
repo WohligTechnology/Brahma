@@ -108,30 +108,28 @@ function addHTMLTags(page) {
                 }
             case "radio":
                 {
-
+                    tagdata += "<div class='form-group'><label>" + sails._.capitalize(n.headname) + "</label>";
+                    // <input type='" + n.type + "' class='form-control' ng-model = '" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' placeholder='" + sails._.capitalize(n.name) + "'"
+                    _.each(n.radiocheck, function(m) {
+                        if (m.type == "radio") {
+                            tagdata += "<input type='" + m.type + "' name='" + sails._.camelCase(n.headname).toLowerCase() + "' ng-model='" + page.name.toLowerCase() + "." + sails._.camelCase(n.headname).toLowerCase() + "' value='" + m.name + "'> " + m.name + "";
+                        } else if (m.type == "checkbox") {
+                            tagdata += "<input type='" + m.type + "' ng-model='" + page.name.toLowerCase() + "." + sails._.camelCase(n.headname).toLowerCase() + "' value='" + m.name + "'> " + m.name + "";
+                        }
+                    })
+                    tagdata += "</div>";
+                    break;
                 }
             default:
                 {
-                    if (n.type == 'radio' || n.type == 'checkbox') {
-                        tagdata += "<div class='form-group'><label>" + sails._.capitalize(n.name) + "</label><input type='" + n.type + "' name='" + sails._.camelCase(n.name).toLowerCase() + "' class='form-control' ng-model = '" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' placeholder='" + sails._.capitalize(n.name) + "'";
-                        if (n.validation) {
-                            _.each(n.validation, function(m) {
-                                tagdata += " " + m;
-                            })
-                            tagdata += " > </div>";
-                        } else {
-                            tagdata += " > </div>";
-                        }
+                    tagdata += "<div class='form-group'><label>" + sails._.capitalize(n.name) + "</label><input type='" + n.type + "' class='form-control' ng-model = '" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' placeholder='" + sails._.capitalize(n.name) + "'";
+                    if (n.validation) {
+                        _.each(n.validation, function(m) {
+                            tagdata += " " + m;
+                        })
+                        tagdata += " > </div>";
                     } else {
-                        tagdata += "<div class='form-group'><label>" + sails._.capitalize(n.name) + "</label><input type='" + n.type + "' class='form-control' ng-model = '" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' placeholder='" + sails._.capitalize(n.name) + "'";
-                        if (n.validation) {
-                            _.each(n.validation, function(m) {
-                                tagdata += " " + m;
-                            })
-                            tagdata += " > </div>";
-                        } else {
-                            tagdata += " > </div>";
-                        }
+                        tagdata += " > </div>";
                     }
                     break;
                 }
