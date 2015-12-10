@@ -13,7 +13,7 @@ module.exports = {
                     theme();
                 } else {
                     res.json({
-                        value: "false",
+                        value: false,
                         comment: "Theme-id is incorrect"
                     });
                 }
@@ -43,7 +43,7 @@ module.exports = {
                 Theme.delete(req.body, print);
             } else {
                 res.json({
-                    value: "false",
+                    value: false,
                     comment: "Theme-id is incorrect"
                 });
             }
@@ -55,10 +55,24 @@ module.exports = {
         }
     },
     find: function(req, res) {
-        function callback(data) {
-            res.json(data);
-        };
-        Theme.find(req.body, callback);
+        if (req.body) {
+            if (req.body.theme && Array.isArray(req.body.theme)) {
+                var print = function(data) {
+                    res.json(data);
+                }
+                Theme.find(req.body, print);
+            } else {
+                res.json({
+                    value: false,
+                    comment: "Please provide parameters"
+                });
+            }
+        } else {
+            res.json({
+                value: false,
+                comment: "Please provide parameters"
+            });
+        }
     },
     findone: function(req, res) {
         if (req.body) {
@@ -69,7 +83,7 @@ module.exports = {
                 Theme.findone(req.body, print);
             } else {
                 res.json({
-                    value: "false",
+                    value: false,
                     comment: "Theme-id is incorrect"
                 });
             }

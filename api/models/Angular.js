@@ -479,7 +479,7 @@ function addViews(page) {
                         return rindex.type == 'text';
                     })
                     filedata = filedata.replace("Artist", sails._.capitalize(page.structure[textindex].name));
-                    filedata = filedata.replace("{{value.artist}}", "{{value." + page.structure[textindex].name.toLowerCase() + "}}");
+                    filedata = filedata.replace("{{value.artist}}", "{{value." + sails._.camelCase(page.structure[textindex].name).toLowerCase() + "}}");
                     makeviewpage.write(filedata);
                 }
             });
@@ -507,15 +507,15 @@ function makesailsproj(data) {
         if (stdout) {
             console.log(stdout);
             _.each(data.models, function(n) {
-                var makejsfile = sails.fs.createWriteStream(baseurl + "/api/models/" + sails._.capitalize(n.name) + ".js");
+                var makejsfile = sails.fs.createWriteStream(baseurl + "/api/models/" + sails._.capitalize(sails._.camelCase(n.name)) + ".js");
                 sails.fs.readFile('./readfiles/CreateOModel.js', 'utf8', function(err, data) {
                     if (err) throw err;
-                    var somedata = data.split("user").join(n.name.toLowerCase());
+                    var somedata = data.split("user").join(sails._.camelCase(n.name).toLowerCase());
                     var index = _.findIndex(n.structure, function(chr) {
                         return chr.type == 'text';
                     });
                     if (index != -1) {
-                        somedata = somedata.split("name").join(n.structure[index].name.toLowerCase());
+                        somedata = somedata.split("name").join(sails._.camelCase(n.structure[index].name).toLowerCase());
                         makejsfile.write(somedata);
                     } else if (index == -1) {
                         somedata = somedata.split("//Findlimited");
@@ -523,10 +523,10 @@ function makesailsproj(data) {
                         makejsfile.write(somedata);
                     }
                 });
-                var makecontrolfile = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(n.name) + "Controller.js");
+                var makecontrolfile = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(sails._.camelCase(n.name)) + "Controller.js");
                 sails.fs.readFile('./readfiles/CreateOController.js', 'utf8', function(err, data) {
                     if (err) throw err;
-                    var somecontdata = data.split("User").join(sails._.capitalize(n.name));
+                    var somecontdata = data.split("User").join(sails._.capitalize(sails._.camelCase(n.name)));
                     makecontrolfile.write(somecontdata);
                 });
                 if (n.structure) {
@@ -535,16 +535,16 @@ function makesailsproj(data) {
                             var apiname = _.indexOf(newarr, m.name);
                             if (apiname == -1) {
                                 newarr.push(m.name);
-                                var makearraymodel = sails.fs.createWriteStream(baseurl + "/api/models/" + sails._.capitalize(m.name) + ".js");
+                                var makearraymodel = sails.fs.createWriteStream(baseurl + "/api/models/" + sails._.capitalize(sails._.camelCase(m.name)) + ".js");
                                 sails.fs.readFile('./readfiles/CreateOArrayModel.js', 'utf8', function(err, data) {
                                     if (err) throw err;
-                                    var somedata = data.split("user").join(n.name.toLowerCase());
-                                    somedata = somedata.split("feed").join(m.name.toLowerCase());
+                                    var somedata = data.split("user").join(sails._.camelCase(n.name).toLowerCase());
+                                    somedata = somedata.split("feed").join(sails._.camelCase(m.name).toLowerCase());
                                     var index = _.findIndex(m.structure, function(chr) {
                                         return chr.type == 'text';
                                     });
                                     if (index != -1) {
-                                        somedata = somedata.split("name").join(m.structure[index].name.toLowerCase());
+                                        somedata = somedata.split("name").join(sails._.camelCase(m.structure[index].name).toLowerCase());
                                         makearraymodel.write(somedata);
                                     } else if (index == -1) {
                                         somedata = somedata.split("//Findlimited");
@@ -552,11 +552,11 @@ function makesailsproj(data) {
                                         makearraymodel.write(somedata);
                                     }
                                 });
-                                var makearraycontrol = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(m.name) + "Controller.js");
+                                var makearraycontrol = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(sails._.camelCase(m.name)) + "Controller.js");
                                 sails.fs.readFile('./readfiles/CreateOArrayController.js', 'utf8', function(err, data) {
                                     if (err) throw err;
-                                    var somecontdata = data.split("Feed").join(sails._.capitalize(m.name));
-                                    somecontdata = somecontdata.split("user").join(n.name.toLowerCase());
+                                    var somecontdata = data.split("Feed").join(sails._.capitalize(sails._.camelCase(m.name)));
+                                    somecontdata = somecontdata.split("user").join(sails._.camelCase(n.name).toLowerCase());
                                     makearraycontrol.write(somecontdata);
                                 });
                             }
@@ -565,16 +565,17 @@ function makesailsproj(data) {
                                 return chr.name == m.api;
                             });
                             if (nameindex == -1) {
-                                var makejsfile = sails.fs.createWriteStream(baseurl + "/api/models/" + sails._.capitalize(m.api) + ".js");
+                                var makejsfile = sails.fs.createWriteStream(baseurl + "/api/models/" + sails._.capitalize(sails._.camelCase(m.api)) + ".js");
                                 sails.fs.readFile('./readfiles/CreateOUiSelectmodel.js', 'utf8', function(err, data) {
                                     if (err) throw err;
-                                    var somedata = data.split("theme").join(m.api.toLowerCase());
+                                    var somedata = data.split("theme").join(sails._.camelCase(m.api).toLowerCase());
                                     makejsfile.write(somedata);
                                 });
-                                var makecontrolfile = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(m.api) + "Controller.js");
+                                var makecontrolfile = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(sails._.camelCase(m.api)) + "Controller.js");
                                 sails.fs.readFile('./readfiles/CreateOUiselectcontroller.js', 'utf8', function(err, data) {
                                     if (err) throw err;
-                                    var somecontdata = data.split("Theme").join(sails._.capitalize(m.api));
+                                    var somecontdata = data.split("Theme").join(sails._.capitalize(sails._.camelCase(m.api)));
+                                    somecontdata = somecontdata.split("theme").join(sails._.camelCase(m.api).toLowerCase());
                                     makecontrolfile.write(somecontdata);
                                 });
                             }
@@ -583,16 +584,16 @@ function makesailsproj(data) {
                                 return chr.name == m.api;
                             });
                             if (nameindex == -1) {
-                                var makejsfile = sails.fs.createWriteStream(baseurl + "/api/models/" + sails._.capitalize(m.api) + ".js");
+                                var makejsfile = sails.fs.createWriteStream(baseurl + "/api/models/" + sails._.capitalize(sails._.camelCase(m.api)) + ".js");
                                 sails.fs.readFile('./readfiles/CreateOModel.js', 'utf8', function(err, data) {
                                     if (err) throw err;
-                                    var somedata = data.split("user").join(m.api.toLowerCase());
+                                    var somedata = data.split("user").join(sails._.camelCase(m.api).toLowerCase());
                                     makejsfile.write(somedata);
                                 });
-                                var makecontrolfile = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(m.api) + "Controller.js");
+                                var makecontrolfile = sails.fs.createWriteStream(baseurl + "/api/controllers/" + sails._.capitalize(sails._.camelCase(m.api)) + "Controller.js");
                                 sails.fs.readFile('./readfiles/CreateOController.js', 'utf8', function(err, data) {
                                     if (err) throw err;
-                                    var somecontdata = data.split("User").join(sails._.capitalize(m.api));
+                                    var somecontdata = data.split("User").join(sails._.capitalize(sails._.camelCase(m.api)));
                                     makecontrolfile.write(somecontdata);
                                 });
                             }
@@ -610,7 +611,7 @@ function makesailsproj(data) {
             });
             var connpath = baseurl + '/config/connections.js';
             sails.fs.readFile(connpath, 'utf8', function(err, data2) {
-                var conndata = data2.replace("// database: 'your_mongo_db_name_here'", "database: '" + data.projectname.toLowerCase() + "'");
+                var conndata = data2.replace("// database: 'your_mongo_db_name_here'", "database: '" + sails._.camelCase(data.projectname).toLowerCase() + "'");
                 var connfile = sails.fs.createWriteStream(connpath);
                 connfile.write(conndata);
             });
