@@ -176,7 +176,6 @@ module.exports = {
                         name: {
                             '$regex': check
                         },
-                        category: data.category
                     }).limit(10).toArray(function(err, found) {
                         if (err) {
                             callback({
