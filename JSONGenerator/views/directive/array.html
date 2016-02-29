@@ -13,7 +13,7 @@
                 <input type="text" class="form-control" createovalidation='GalleryStrucObj' objkey="{{$index}}" ng-model="objVal[objKey]" placeholder="{{objKey}}" ng-if="GalleryStrucObj.structure[$index].type=='text'">
                 <input type="date" class="form-control" createovalidation='GalleryStrucObj' objkey="{{$index}}" ng-model="objVal[objKey]" placeholder="{{objKey}}" ng-if="GalleryStrucObj.structure[$index].type=='date'">
                 <input type="number" class="form-control" createovalidation='GalleryStrucObj' objkey="{{$index}}" ng-model="objVal[objKey]" placeholder="{{objKey}}" ng-if="GalleryStrucObj.structure[$index].type=='number'">
-                <select class="form-control" ng-options="option._id as option.name for option in GalleryStrucObj.structure[$index].options" ng-model="objVal[objKey]" ng-if="GalleryStrucObj.structure[$index].type=='select'"></select>
+                <select class="form-control" ng-options="option.id as option.name for option in GalleryStrucObj.structure[$index].options" ng-model="objVal[objKey]" ng-if="GalleryStrucObj.structure[$index].type=='select'"></select>
             </td>
             <td>
                 <input class="btn btn-danger" type="button" ng-click="GalleryStrucObj.remove(objVal);" value="Delete">

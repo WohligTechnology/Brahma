@@ -608,7 +608,7 @@ function makesailsproj(data) {
                             });
                             if (nameindex == -1) {
                                 var makejsfile = sails.fs.createWriteStream(baseurl + "/api/models/" + sails._.capitalize(sails._.camelCase(m.api)) + ".js");
-                                sails.fs.readFile('./readfiles/CreateOUiSelectmodel.js', 'utf8', function(err, data) {
+                                sails.fs.readFile('./readfiles/CreateOUiselectmodel.js', 'utf8', function(err, data) {
                                     if (err) throw err;
                                     var somedata = data.split("theme").join(sails._.camelCase(m.api).toLowerCase());
                                     makejsfile.write(somedata);

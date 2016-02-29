@@ -86,7 +86,14 @@ phonecatControllers.controller('models', function($scope, TemplateService, Navig
         "type": "text"
     }, {
         "name": "uploadtype",
-        "type": "text"
+        "type": "select",
+        "options": [{
+            "id": "single",
+            "name": "Single"
+        }, {
+            "id": "multiple",
+            "name": "Multiple"
+        }]
     }, {
         "name": "whichone",
         "type": "number"
@@ -124,6 +131,9 @@ phonecatControllers.controller('models', function($scope, TemplateService, Navig
         "type": "text"
     }, {
         "name": "type",
+        "type": "text"
+    }, {
+        "name": "options",
         "type": "text"
     }];
 
@@ -204,7 +214,14 @@ phonecatControllers.controller('models', function($scope, TemplateService, Navig
         });
 
         _.each($scope.json.array, function(n) {
+            console.log(n);
             n.type = "array";
+            _.each(n.structure, function(struct) {
+                if (struct.type == "select") {
+                    var splited = struct.options.split(',');
+                    struct.options = splited;
+                }
+            })
             $scope.newjson.structure.push(n);
         });
 
