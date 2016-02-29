@@ -1,0 +1,317 @@
+{
+    "path": "/home/vignesh/Documents/htdocs",
+    "projectname": "FlexiNode",
+    "models": [{
+        "structure": [{
+            "order": 1,
+            "name": "First Name",
+            "type": "text",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 2,
+            "name": "Last Name",
+            "type": "text",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 3,
+            "name": "Email",
+            "type": "email",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 4,
+            "name": "Phone Number",
+            "type": "number",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 5,
+            "name": "Password",
+            "type": "number",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 6,
+            "name": "Website",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 7,
+            "name": "Education",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 8,
+            "name": "Experience",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 9,
+            "name": "Key Skill",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 10,
+            "name": "Accesslevel",
+            "type": "select",
+            "isfromdb": "false",
+            "api": "",
+            "option": [{
+                "value": "user",
+                "name": "User"
+            }, {
+                "value": "admin",
+                "name": "Admin"
+            }]
+        }, {
+            "order": 11,
+            "name": "Designation",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 12,
+            "name": "Address",
+            "type": "textarea",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 13,
+            "name": "Company Name",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 14,
+            "name": "Company Address",
+            "type": "textarea",
+            "validation": ""
+        }, {
+            "order": 15,
+            "name": "Company Experience",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 16,
+            "name": "Company Email",
+            "type": "email",
+            "validation": ""
+        }, {
+            "order": 17,
+            "name": "Company Number",
+            "type": "number",
+            "validation": ""
+        }, {
+            "order": 18,
+            "name": "Company Website",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 19,
+            "name": "Job",
+            "api": "job",
+            "type": "uiselect"
+        }],
+        "name": "User"
+    }, {
+        "structure": [{
+            "order": 1,
+            "name": "Name",
+            "type": "text",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 2,
+            "name": "Period",
+            "type": "number",
+            "validation": ""
+        }, {
+            "order": 3,
+            "name": "Salary",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 4,
+            "name": "Expiry",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 5,
+            "name": "Description",
+            "type": "textarea",
+            "validation": ""
+        }, {
+            "order": 6,
+            "name": "User",
+            "api": "user",
+            "type": "uiselect"
+        }, {
+            "order": 7,
+            "name": "Applied",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 8,
+            "name": "Shortlisted",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 9,
+            "name": "Usercreator",
+            "type": "select",
+            "isfromdb": "true",
+            "api": "user",
+            "option": []
+        }, {
+            "order": 10,
+            "name": "Userassigned",
+            "type": "select",
+            "isfromdb": "true",
+            "api": "user",
+            "option": []
+        }, {
+            "order": 11,
+            "name": "Role",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 12,
+            "name": "Exposure",
+            "type": "text",
+            "validation": ""
+        }],
+        "name": "Job"
+    }, {
+        "structure": [{
+            "order": 1,
+            "name": "Name",
+            "type": "text",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 2,
+            "name": "Details",
+            "type": "textarea",
+            "validation": ""
+        }],
+        "name": "Category"
+    }, {
+        "structure": [{
+            "order": 1,
+            "name": "Name",
+            "type": "text",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 2,
+            "name": "Address",
+            "type": "textarea",
+            "validation": ""
+        }, {
+            "order": 3,
+            "name": "Experience",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 4,
+            "name": "Email",
+            "type": "email",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 5,
+            "name": "Number",
+            "type": "number",
+            "validation": ""
+        }, {
+            "order": 6,
+            "name": "Website",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 7,
+            "name": "Jobs",
+            "api": "job",
+            "type": "uiselect"
+        }],
+        "name": "Company"
+    }, {
+        "structure": [{
+            "order": 1,
+            "name": "Title",
+            "type": "text",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 2,
+            "name": "Details",
+            "type": "textarea",
+            "validation": ""
+        }, {
+            "order": 3,
+            "name": "Status",
+            "type": "select",
+            "isfromdb": "false",
+            "api": "",
+            "option": [{
+                "value": "yes",
+                "name": "Yes"
+            }, {
+                "value": "no",
+                "name": "No"
+            }]
+        }],
+        "name": "Pages"
+    }, {
+        "structure": [{
+            "order": 1,
+            "name": "Name",
+            "type": "text",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 2,
+            "name": "Order",
+            "type": "number",
+            "validation": ""
+        }, {
+            "order": 3,
+            "name": "Content",
+            "type": "textarea",
+            "validation": ""
+        }, {
+            "order": 4,
+            "name": "Company",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 5,
+            "name": "Designation",
+            "type": "text",
+            "validation": ""
+        }],
+        "name": "Testimonial"
+    }, {
+        "structure": [{
+            "order": 1,
+            "name": "Title",
+            "type": "text",
+            "validation": [
+                "required"
+            ]
+        }],
+        "name": "Slider"
+    }]
+}
