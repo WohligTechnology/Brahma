@@ -214,14 +214,25 @@ phonecatControllers.controller('models', function($scope, TemplateService, Navig
         });
 
         _.each($scope.json.array, function(n) {
-            console.log(n);
             n.type = "array";
             _.each(n.structure, function(struct) {
                 if (struct.type == "select") {
-                    var splited = struct.options.split(',');
-                    struct.options = splited;
+                    if (struct.options) {
+                        var splited = struct.options.split(',');
+                        var arrObj = [];
+                        _.each(splited, function(option) {
+                            arrObj.push({
+                                id: option,
+                                name: option
+                            });
+                        })
+                        struct.options = arrObj;
+                    }
+                } else {
+                    struct.options = "";
                 }
             })
+            console.log(n);
             $scope.newjson.structure.push(n);
         });
 
