@@ -12,7 +12,11 @@ module.exports = {
         basepath = data.path + "/" + data.projectname + "/";
         projname = data.projectname + "Node";
         baseurl = sails.path.normalize(data.path) + "/" + data.projectname + "Node";
-        makesailsproj(data);
+        var i = 0;
+        setInterval(function() {
+            console.log(++i + "s");
+        }, 1000);
+        // makesailsproj(data);
 
         //        var jsontoparse = data.models;
         //        addService(data);
@@ -26,6 +30,9 @@ module.exports = {
                 console.log(err);
                 callback(err);
             } else {
+                sails.exec("rm -rf " + basepath + ".git", function(err, stdout, stderr) {
+                    console.log(err);
+                });
                 var jsontoparse = data.models;
                 addService(data);
                 addPath(data);
@@ -118,6 +125,20 @@ function addHTMLTags(page) {
                         }
                     })
                     tagdata += "</div>";
+                    break;
+                }
+            case "image":
+                {
+                    if (n.uploadtype == "single") {
+                        tagdata += "<div class='form-group'><label for='exampleInputEmail1'>" + sails._.capitalize(n.name) + "</label><div class='scroll-x'><div class='img-box'><div class='many-img' ng-if='" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "'><img ng-src='{{" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + " | uploadpath}}' width='200'><button type='button' ng-click='removeimage" + sails._.camelCase(n.name).toLowerCase() + "();' class='btn btn-danger close-btn'><i class='glyphicon glyphicon-trash'></i></button></div></div></div>";
+                    } else {
+                        tagdata += "<div class='form-group'><label for='exampleInputEmail1'>" + sails._.capitalize(n.name) + "</label><div class=''><div class='img-box'><ul ui-sortable ng-model='" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' ng-if='" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + ".length!=0'><li ng-repeat='bill in " + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + "' class='many-img'><img ng-src='{{bill | uploadpath}}' ng-if='" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + ".length!=0' width='200'><button type='button' ng-click='removeimage" + sails._.camelCase(n.name).toLowerCase() + "(" + page.name.toLowerCase() + "." + sails._.camelCase(n.name).toLowerCase() + ".indexOf(bill));' class='btn btn-danger close-btn'><i class='glyphicon glyphicon-trash'></i></button></li></ul></div></div>";
+                    }
+                    tagdata += "<div class='upload-div'><div ng-init='httpMethod=POST;howToSend = 1;'></div><div class='upload-buttons'><input type='file' name='file' ng-file-select='onFileSelect($files," + n.whichone + "," + '"' + n.uploadtype + '"' + ")' onclick='this.value=null'";
+                    if (n.uploadtype == "multiple") {
+                        tagdata += " multiple";
+                    }
+                    tagdata += "></div></div></div>";
                     break;
                 }
             default:
@@ -220,14 +241,9 @@ function editController(jsondata) {
             merge = '';
             var splitdataservice = data.split("//Add New Service");
             _.each(service.models, function(n) {
-
                 tagdataservice += addServiceData(n);
-
                 merge = splitdataservice;
-
             })
-
-
             if (merge != "") {
                 tagdataservice = tagdataservice + "//Add New Service";
                 var leftdata = merge[0].split("//Add New Left");
@@ -252,7 +268,6 @@ function getControllerData(data, n, fromdata, state) {
     if (state == "edit") {
         fromdata = fromdata.split("//edit" + a);
     }
-
     if (data != "" || state == "edit") {
         if (data != "") {
             tagdata += "//" + data + sails._.capitalize(n.name) + " Controller\nphonecatControllers.controller('" + data + sails._.capitalize(n.name) + "Ctrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {$scope.template = TemplateService;$scope.menutitle =NavigationService.makeactive('" + sails._.capitalize(n.name) + "');TemplateService.title = $scope.menutitle;TemplateService.submenu = '';TemplateService.content = 'views/" + data + n.name.toLowerCase() + ".html';TemplateService.list = 2;$scope.navigation = NavigationService.getnav();$scope." + n.name.toLowerCase() + " = {};";
@@ -273,7 +288,6 @@ function getControllerData(data, n, fromdata, state) {
                     if (data == "edit") {
                         tagdata += "if(!$scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + "){$scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + " = [];}";
                     }
-
                 }
             });
             if (data == "edit") {
@@ -287,7 +301,6 @@ function getControllerData(data, n, fromdata, state) {
     }
 
     _.each(n.structure, function(m) {
-
         switch (m.type) {
             case "uiselect":
                 {
@@ -296,7 +309,6 @@ function getControllerData(data, n, fromdata, state) {
                     tagdata += "NavigationService.save" + m.name + "(item, function (data, status) {if (data.value == true) {item._id = data.id;}});select.selected = _.without(select.selected, l);select.selected.push(item);$scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + " = select.selected;}});}$scope.refresh" + sails._.capitalize(m.name) + " = function (search) {$scope." + m.name.toLowerCase() + " = [];if (search) {NavigationService.find" + sails._.capitalize(m.name) + "(search, $scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + ", function (data, status) {if (data.value != false){$scope." + m.name.toLowerCase() + " = data;}});}};";
                     break;
                 };
-
             case "select":
                 {
                     if (m.isfromdb == "true") {
@@ -304,7 +316,6 @@ function getControllerData(data, n, fromdata, state) {
                     }
                     break;
                 };
-
             case "array":
                 {
                     var stuct = m.structure;
@@ -314,8 +325,39 @@ function getControllerData(data, n, fromdata, state) {
                     tagdata += "$scope." + sails._.capitalize(m.name) + "Structure=" + JSON.stringify(m.structure) + ";";
                     break;
                 }
+            case "image":
+                {
+                    if (m.uploadtype == "single") {
+                        tagdata += "$scope.removeimage" + sails._.camelCase(m.name).toLowerCase() + " = function() {$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + " = '';};";
+                    } else {
+                        if (data != 'edit')
+                            tagdata += "$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + "=[];";
+                        tagdata += "$scope.removeimage" + sails._.camelCase(m.name).toLowerCase() + " = function(i) {$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + ".splice(i, 1);};";
+                    }
+                    if (data != 'edit') {
+                        if (tagdata.indexOf('$scope.onFileSelect') == -1) {
+                            tagdata += "$scope.onFileSelect = function($files,whichone,uploadtype) {globalfunction.onFileSelect($files, function(image) {if(whichone==" + m.whichone + "){$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + " = image;if(uploadtype=='single'){$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + " = image[0];}}})}";
+                        } else {
+                            var foundIndex = tagdata.indexOf(' = image[0];}}');
+                            if (foundIndex != -1) {
+                                var toJoin = " = image[0];}}else if(whichone==" + m.whichone + "){$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + " = image;if(uploadtype=='single'){$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + " = image[0];}}";
+                                tagdata = tagdata.split(' = image[0];}}').join(toJoin);
+                            }
+                        }
+                    } else if (data == 'edit') {
+                        if (tagdata.indexOf('$scope.onFileSelect') == -1) {
+                            tagdata += "$scope.onFileSelect = function($files,whichone,uploadtype) {globalfunction.onFileSelect($files, function(image) {if(whichone==" + m.whichone + "){if(uploadtype=='multiple'){if($scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + ".length>0" + "){_.each(image,function(n){$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + ".push(n)})}else{$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + " = image;}}else if(uploadtype=='single'){$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + " = image[0];}}})}";
+                        } else {
+                            var foundIndex = tagdata.indexOf(' = image[0];}}');
+                            if (foundIndex != -1) {
+                                var toJoin = " = image[0];}}else if(whichone==" + m.whichone + "){if(uploadtype=='multiple'){if($scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + ".length>0" + "){_.each(image,function(n){$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + ".push(n)})}else{$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + " = image;}}else if(uploadtype=='single'){$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + " = image[0];}}";
+                                tagdata = tagdata.split(' = image[0];}}').join(toJoin);
+                            }
+                        }
+                    }
+                    break;
+                }
         };
-
     });
     if (fromdata == "") {
         tagdata += "\n//" + data + sails._.capitalize(n.name) + "\n});\n//" + data + sails._.capitalize(n.name) + " Controller\n";

@@ -46,6 +46,7 @@ phonecatControllers.controller('models', function($scope, TemplateService, Navig
     $scope.navigation = NavigationService.getnav();
     $scope.json = {};
     $scope.json.default = [];
+    $scope.json.image = [];
     $scope.json.select = [];
     $scope.json.uiselect = [];
     $scope.newjson = {};
@@ -75,6 +76,20 @@ phonecatControllers.controller('models', function($scope, TemplateService, Navig
     }, {
         "name": "validation",
         "type": "text",
+    }];
+
+    $scope.ImageStructure = [{
+        "name": "order",
+        "type": "text"
+    }, {
+        "name": "name",
+        "type": "text"
+    }, {
+        "name": "uploadtype",
+        "type": "text"
+    }, {
+        "name": "whichone",
+        "type": "number"
     }];
 
     $scope.RadioCheckStructure = [{
@@ -162,6 +177,11 @@ phonecatControllers.controller('models', function($scope, TemplateService, Navig
         _.each($scope.json.default, function(n) {
             if (n.validation)
                 n.validation = n.validation.split(",");
+            $scope.newjson.structure.push(n);
+        });
+
+        _.each($scope.json.image, function(n) {
+            n.type = "image";
             $scope.newjson.structure.push(n);
         });
 
