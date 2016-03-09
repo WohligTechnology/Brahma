@@ -1,6 +1,6 @@
 module.exports = {
-    save: function(data, callback) {
-        sails.query(function(err, db) {
+    save: function (data, callback) {
+        sails.query(function (err, db) {
             if (err) {
                 console.log(err);
                 callback({
@@ -12,7 +12,7 @@ module.exports = {
                     data._id = sails.ObjectID();
                     db.collection("theme").find({
                         "name": data.name
-                    }).toArray(function(err, data2) {
+                    }).toArray(function (err, data2) {
                         if (err) {
                             console.log(err);
                             callback({
@@ -23,7 +23,7 @@ module.exports = {
                             callback(data2);
                             db.close();
                         } else {
-                            db.collection('theme').insert(data, function(err, created) {
+                            db.collection('theme').insert(data, function (err, created) {
                                 if (err) {
                                     console.log(err);
                                     callback({
@@ -53,7 +53,7 @@ module.exports = {
                         _id: theme
                     }, {
                         $set: data
-                    }, function(err, updated) {
+                    }, function (err, updated) {
                         if (err) {
                             console.log(err);
                             callback({
@@ -83,14 +83,13 @@ module.exports = {
             }
         });
     },
-    findlimited: function(data, callback) {
-        var newcallback = 0;
+    findlimited: function (data, callback) {
         var newreturns = {};
         newreturns.data = [];
         var check = new RegExp(data.search, "i");
-        var pagesize = data.pagesize;
-        var pagenumber = data.pagenumber;
-        sails.query(function(err, db) {
+        var pagesize = parseInt(data.pagesize);
+        var pagenumber = parseInt(data.pagenumber);
+        sails.query(function (err, db) {
             if (err) {
                 console.log(err);
                 callback({
@@ -98,60 +97,67 @@ module.exports = {
                 });
             }
             if (db) {
-
-                db.collection("theme").count({
-                    name: {
-                        '$regex': check
+                callbackfunc1();
+                async.parallel([
+                    function (callback) {
+                        db.collection("theme").count({
+                            name: {
+                                '$regex': check
+                            }
+                        }, function (err, number) {
+                            if (number && number != "") {
+                                newreturns.total = number;
+                                newreturns.totalpages = Math.ceil(number / data.pagesize);
+                                callback(null, newreturns);
+                            } else if (err) {
+                                console.log(err);
+                                callback(err, null);
+                            } else {
+                                callback(null, null);
+                            }
+                        });
                     }
-                }, function(err, number) {
-                    if (number) {
-                        newreturns.total = number;
-                        newreturns.totalpages = Math.ceil(number / data.pagesize);
-                        callbackfunc1();
-                    } else if (err) {
+
+                    function (callback) {
+                        db.collection("theme").find({
+                            name: {
+                                '$regex': check
+                            }
+                        }).skip(pagesize * (pagenumber - 1)).limit(pagesize).toArray(function (err, found) {
+                            if (err) {
+                                console.log(err);
+                                callback(err, null);
+                            } else if (found && found[0]) {
+                                newreturns.data = found;
+                                callback(null, newreturns);
+                            } else {
+                                callback(null, null);
+                            }
+                        });
+                    }
+                ], function (err, data3) {
+                    if (err) {
                         console.log(err);
                         callback({
                             value: false
                         });
                         db.close();
+                    } else if (data3 && data3[0]) {
+                        delete data3[0].password;
+                        callback(newreturns);
+                        db.close();
                     } else {
                         callback({
                             value: false,
-                            comment: "Count of null"
+                            comment: "No data found"
                         });
                         db.close();
                     }
                 });
-
-                function callbackfunc1() {
-                    db.collection("theme").find({
-                        name: {
-                            '$regex': check
-                        }
-                    }, {}).skip(pagesize * (pagenumber - 1)).limit(pagesize).toArray(function(err, found) {
-                        if (err) {
-                            callback({
-                                value: false
-                            });
-                            console.log(err);
-                            db.close();
-                        } else if (found && found[0]) {
-                            newreturns.data = found;
-                            callback(newreturns);
-                            db.close();
-                        } else {
-                            callback({
-                                value: false,
-                                comment: "No data found"
-                            });
-                            db.close();
-                        }
-                    });
-                }
             }
         });
     },
-    find: function(data, callback) {
+    find: function (data, callback) {
         if (data.search && data.theme) {
             var returns = [];
             var exit = 0;
@@ -163,7 +169,7 @@ module.exports = {
                     callback(data);
                 }
             }
-            sails.query(function(err, db) {
+            sails.query(function (err, db) {
                 if (err) {
                     console.log(err);
                     callback({
@@ -176,7 +182,7 @@ module.exports = {
                         name: {
                             '$regex': check
                         },
-                    }).limit(10).toArray(function(err, found) {
+                    }).limit(10).toArray(function (err, found) {
                         if (err) {
                             callback({
                                 value: false
@@ -187,9 +193,9 @@ module.exports = {
                             exit++;
                             if (data.theme.length != 0) {
                                 var nedata;
-                                nedata = _.remove(found, function(n) {
+                                nedata = _.remove(found, function (n) {
                                     var flag = false;
-                                    _.each(data.theme, function(n1) {
+                                    _.each(data.theme, function (n1) {
                                         if (n1.name == n.name) {
                                             flag = true;
                                         }
@@ -216,8 +222,8 @@ module.exports = {
             });
         }
     },
-    findone: function(data, callback) {
-        sails.query(function(err, db) {
+    findone: function (data, callback) {
+        sails.query(function (err, db) {
             if (err) {
                 console.log(err);
                 callback({
@@ -227,7 +233,7 @@ module.exports = {
             if (db) {
                 db.collection("theme").find({
                     "_id": sails.ObjectID(data._id)
-                }, {}).toArray(function(err, data2) {
+                }, {}).toArray(function (err, data2) {
                     if (err) {
                         console.log(err);
                         callback({
@@ -248,8 +254,8 @@ module.exports = {
             }
         });
     },
-    delete: function(data, callback) {
-        sails.query(function(err, db) {
+    delete: function (data, callback) {
+        sails.query(function (err, db) {
             if (err) {
                 console.log(err);
                 callback({
@@ -258,7 +264,7 @@ module.exports = {
             }
             var ctheme = db.collection('theme').remove({
                 _id: sails.ObjectID(data._id)
-            }, function(err, deleted) {
+            }, function (err, deleted) {
                 if (deleted) {
                     callback({
                         value: true
