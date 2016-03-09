@@ -16,7 +16,7 @@ module.exports = {
         setInterval(function() {
             console.log(++i + "s");
         }, 1000);
-        // makesailsproj(data);
+        makesailsproj(data);
 
         //        var jsontoparse = data.models;
         //        addService(data);
@@ -277,11 +277,11 @@ function getControllerData(data, n, fromdata, state) {
                 if (m.type == "array") {
                     if (state == "edit") {
                         formdataaray = fromdata[0].split("//Add More Array");
-                        aaraydata = "if(!$scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + "){$scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + " = [];}";
+                        aaraydata = "if(!$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + "){$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + " = [];}";
                         fromdata[0] = formdataaray[0] + aaraydata + "//Add More Array" + formdataaray[1];
                     }
                     if (data == "edit") {
-                        tagdata += "if(!$scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + "){$scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + " = [];}";
+                        tagdata += "if(!$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + "){$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + " = [];}";
                     }
                 }
             });
@@ -299,15 +299,15 @@ function getControllerData(data, n, fromdata, state) {
         switch (m.type) {
             case "uiselect":
                 {
-                    tagdata += "$scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + " = [];$scope.ismatch" + sails._.capitalize(sails._.camelCase(m.name)) + " = function (data, select) {_.each(data, function (l, key) {if (typeof l == 'string') {";
+                    tagdata += "$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + " = [];$scope.ismatch" + sails._.capitalize(sails._.camelCase(m.name)) + " = function (data, select) {_.each(data, function (l, key) {if (typeof l == 'string') {";
                     tagdata += "var item = {_id:_.now(),name:_.capitalize(l)};";
-                    tagdata += "NavigationService.save" + m.name + "(item, function (data, status) {if (data.value == true) {item._id = data.id;}});select.selected = _.without(select.selected, l);select.selected.push(item);$scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + " = select.selected;}});}$scope.refresh" + sails._.capitalize(m.name) + " = function (search) {$scope." + m.name.toLowerCase() + " = [];if (search) {NavigationService.find" + sails._.capitalize(m.name) + "(search, $scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + ", function (data, status) {if (data.value != false){$scope." + m.name.toLowerCase() + " = data;}});}};";
+                    tagdata += "NavigationService.save" + sails._.camelCase(sails._.camelCase(m.name)) + "(item, function (data, status) {if (data.value == true) {item._id = data.id;}});select.selected = _.without(select.selected, l);select.selected.push(item);$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + " = select.selected;}});}$scope.refresh" + sails._.capitalize(m.name) + " = function (search) {$scope." + sails._.camelCase(m.name).toLowerCase() + " = [];if (search) {NavigationService.find" + sails._.capitalize(sails._.camelCase(m.name)) + "(search, $scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + ", function (data, status) {if (data.value != false){$scope." + sails._.camelCase(m.name).toLowerCase() + " = data;}});}};";
                     break;
                 };
             case "select":
                 {
                     if (m.isfromdb == "true") {
-                        tagdata += "NavigationService.get" + sails._.capitalize(m.api) + "(function(data,status){$scope." + m.name.toLowerCase() + " = data;});"
+                        tagdata += "NavigationService.get" + sails._.capitalize(m.api) + "(function(data,status){$scope." + sails._.camelCase(m.name).toLowerCase() + " = data;});"
                     }
                     break;
                 };
@@ -315,9 +315,9 @@ function getControllerData(data, n, fromdata, state) {
                 {
                     var stuct = m.structure;
                     if (data == "create") {
-                        tagdata += "$scope." + n.name.toLowerCase() + "." + m.name.toLowerCase() + "=[];";
+                        tagdata += "$scope." + n.name.toLowerCase() + "." + sails._.camelCase(m.name).toLowerCase() + "=[];";
                     }
-                    tagdata += "$scope." + sails._.capitalize(m.name) + "Structure=" + JSON.stringify(m.structure) + ";";
+                    tagdata += "$scope." + sails._.capitalize(sails._.camelCase(m.name)) + "Structure=" + JSON.stringify(m.structure) + ";";
                     break;
                 }
             case "image":

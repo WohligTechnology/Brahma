@@ -227,9 +227,11 @@ phonecatControllers.controller('models', function($scope, TemplateService, Navig
                             });
                         })
                         struct.options = arrObj;
+                    } else {
+                        struct.options = [];
                     }
                 } else {
-                    struct.options = "";
+                    delete struct.options;
                 }
             })
             console.log(n);
