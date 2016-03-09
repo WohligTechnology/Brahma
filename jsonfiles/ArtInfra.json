@@ -1,0 +1,132 @@
+{
+    "path": "/home/dhaval/Documents/htdocs",
+    "projectname": "ArtInfra",
+    "models": [{
+        "structure": [{
+            "order": 1,
+            "name": "Name",
+            "type": "text",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 2,
+            "name": "Home Image",
+            "uploadtype": "single",
+            "whichone": 1,
+            "type": "image"
+        }, {
+            "order": 3,
+            "name": "Activity in Brief",
+            "type": "textarea",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 4,
+            "name": "Detail1",
+            "type": "textarea",
+            "validation": ""
+        }, {
+            "order": 5,
+            "name": "Detail2",
+            "type": "textarea",
+            "validation": ""
+        }, {
+            "order": 6,
+            "name": "Image",
+            "uploadtype": "single",
+            "whichone": 2,
+            "type": "image"
+        }],
+        "name": "Activities"
+    }, {
+        "structure": [{
+            "order": 1,
+            "name": "Name",
+            "type": "text",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 2,
+            "name": "Profile of Partner",
+            "type": "textarea",
+            "validation": ""
+        }, {
+            "order": 3,
+            "name": "Association with Aura Art",
+            "type": "textarea",
+            "validation": ""
+        }, {
+            "order": 4,
+            "name": "Image",
+            "uploadtype": "single",
+            "whichone": 1,
+            "type": "image"
+        }],
+        "name": "Partners"
+    }, {
+        "structure": [{
+            "order": 1,
+            "name": "Title",
+            "type": "text",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 2,
+            "name": "Activity",
+            "api": "Activities",
+            "type": "uiselect"
+        }, {
+            "order": 3,
+            "name": "Period of Project",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 4,
+            "name": "Brief Project Description",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 5,
+            "name": "Image",
+            "uploadtype": "single",
+            "whichone": 1,
+            "type": "image"
+        }],
+        "name": "Projects"
+    }, {
+        "structure": [{
+            "order": 1,
+            "name": "Project Title",
+            "type": "text",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "order": 2,
+            "name": "Name",
+            "type": "text",
+            "validation": ""
+        }, {
+            "order": 3,
+            "name": "Activity",
+            "api": "Activities",
+            "type": "uiselect"
+        }, {
+            "order": 4,
+            "name": "Testimonial",
+            "type": "textarea",
+            "validation": ""
+        }, {
+            "order": 5,
+            "name": "Image",
+            "uploadtype": "single",
+            "whichone": 1,
+            "type": "image"
+        }],
+        "name": "Testimonials"
+    }]
+}

@@ -1,0 +1,654 @@
+{
+  "path": "C:/xampp/htdocs",
+  "projectname": "TagBoss",
+  "models": [
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Email",
+          "type": "email",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 3,
+          "name": "Address",
+          "type": "textarea",
+          "validation": ""
+        },
+        {
+          "order": 4,
+          "name": "Accesslevel",
+          "type": "select",
+          "isfromdb": "false",
+          "api": "",
+          "option": [
+            {
+              "value": "admin",
+              "name": "Admin"
+            },
+            {
+              "value": "customer",
+              "name": "Customer"
+            }
+          ]
+        },
+        {
+          "order": 5,
+          "name": "Credit",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 6,
+          "name": "Credit Logs",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 7,
+          "name": "Personalized Manager",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 8,
+          "name": "Contact No",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        }
+      ],
+      "name": "User"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Order",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 3,
+          "name": "Parent",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 4,
+          "name": "Status",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 5,
+          "name": "Url",
+          "type": "text",
+          "validation": ""
+        }
+      ],
+      "name": "Category"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Category",
+          "type": "select",
+          "isfromdb": "true",
+          "api": "category",
+          "option": []
+        },
+        {
+          "order": 3,
+          "name": "Tag",
+          "api": "tag",
+          "type": "uiselect"
+        },
+        {
+          "order": 4,
+          "name": "Keyword",
+          "api": "keyword",
+          "type": "uiselect"
+        },
+        {
+          "order": 6,
+          "name": "Quantity",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 7,
+          "name": "Weight",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 8,
+          "name": "Length",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 9,
+          "name": "Height",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 10,
+          "name": "Related Products",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 11,
+          "name": "Price",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 12,
+          "name": "Price Discounted",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 13,
+          "name": "Url",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 14,
+          "name": "Buy Back Rate",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 15,
+          "name": "Views",
+          "type": "text",
+          "validation": ""
+        }
+      ],
+      "name": "Product"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Type",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 3,
+          "name": "Values",
+          "type": "text",
+          "validation": ""
+        }
+      ],
+      "name": "Attribute"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Email",
+          "type": "email",
+          "validation": ""
+        },
+        {
+          "order": 3,
+          "name": "User",
+          "type": "select",
+          "isfromdb": "true",
+          "api": "user",
+          "option": []
+        },
+        {
+          "order": 4,
+          "name": "Quantity",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 5,
+          "name": "Affiliate",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 6,
+          "name": "Billing Address(Object)",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 7,
+          "name": "Shipping Address(Object)",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 8,
+          "name": "ShippingId",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 9,
+          "name": "Discount Coupon",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 10,
+          "name": "Tax",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 11,
+          "name": "Billing Amount",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 12,
+          "name": "Shipping Amount",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 13,
+          "name": "Discount Amount",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 14,
+          "name": "Credits",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 15,
+          "name": "Final Amount",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        }
+      ],
+      "name": "Order"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Status",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 3,
+          "name": "Time From",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 4,
+          "name": "Time To",
+          "type": "text",
+          "validation": ""
+        }
+      ],
+      "name": "DiscountCoupon"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 2,
+          "name": "Status",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 3,
+          "name": "Description",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 4,
+          "name": "Url",
+          "type": "text",
+          "validation": ""
+        }
+      ],
+      "name": "Affilliate"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Order",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        }
+      ],
+      "name": "Slider"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Title",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 3,
+          "name": "Content",
+          "type": "textarea",
+          "validation": ""
+        }
+      ],
+      "name": "Pages"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 2,
+          "name": "Image",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 3,
+          "name": "Content",
+          "type": "textarea",
+          "validation": ""
+        },
+        {
+          "order": 4,
+          "name": "Link",
+          "type": "text",
+          "validation": ""
+        }
+      ],
+      "name": "Blocks"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Order",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 3,
+          "name": "Product",
+          "type": "select",
+          "isfromdb": "true",
+          "api": "Product",
+          "option": []
+        }
+      ],
+      "name": "Deal"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Order",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 3,
+          "name": "Product",
+          "type": "select",
+          "isfromdb": "true",
+          "api": "Product",
+          "option": []
+        }
+      ],
+      "name": "Dealoftheday"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Order",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 3,
+          "name": "Logo",
+          "type": "text",
+          "validation": ""
+        }
+      ],
+      "name": "Brand"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Title",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Content",
+          "type": "textarea",
+          "validation": ""
+        },
+        {
+          "order": 3,
+          "name": "Order",
+          "type": "text",
+          "validation": [
+            "only-digits"
+          ]
+        },
+        {
+          "order": 4,
+          "name": "Status",
+          "type": "text",
+          "validation": ""
+        }
+      ],
+      "name": "Faq"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "User",
+          "type": "select",
+          "isfromdb": "true",
+          "api": "User",
+          "option": []
+        },
+        {
+          "order": 3,
+          "name": "Subject",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 4,
+          "name": "Product",
+          "type": "select",
+          "isfromdb": "true",
+          "api": "Product",
+          "option": []
+        },
+        {
+          "order": 5,
+          "name": "Content",
+          "type": "textarea",
+          "validation": ""
+        }
+      ],
+      "name": "Enquiry"
+    }
+  ]
+}

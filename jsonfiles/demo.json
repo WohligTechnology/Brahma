@@ -1,0 +1,92 @@
+//for postman
+{
+    "path": "/home/vignesh/Documents/htdocs",
+    "projectname": "WindowsGreen",
+    "models": [{
+        "name": "user",
+        "structure": [{
+            "name": "name",
+            "type": "text",
+            "validation": [
+                "required",
+                "minlength",
+                "min=5"
+            ]
+        }, {
+            "name": "email",
+            "type": "email",
+            "validation": [
+                "required",
+                "email"
+            ]
+        }, {
+            "name": "Tag",
+            "type": "uiselect",
+            "structure": ["name"]
+        }, {
+            "name": "address",
+            "type": "textarea",
+            "validation": [
+                "required"
+            ]
+        }, {
+            "name": "Discount Coupon",
+            "type": "select",
+            "isfromdb": false,
+            "option": [{
+                "id": 1,
+                "name": "first option"
+            }, {
+                "id": 2,
+                "name": "second option"
+            }, {
+                "id": 3,
+                "name": "third option"
+            }, {
+                "id": 4,
+                "name": "fourth option"
+            }, {
+                "id": 5,
+                "name": "fifth option"
+            }]
+
+        }, {
+            "name": "gallery",
+            "type": "array",
+            "structure": [{
+                "name": "name",
+                "type": "text",
+                "validation": [
+                    "required",
+                    "minlength",
+                    "min=5"
+                ]
+            }, {
+                "name": "image",
+                "type": "image"
+            }, {
+                "name": "name",
+                "type": "text",
+                "validation": [
+                    "required",
+                    "minlength",
+                    "min=5"
+                ]
+            }]
+        }]
+    }]
+}
+
+//for edit
+{
+    "path": "C:/xampp/htdocs",
+    "projectname": "AuraAdminbackend",
+    "models": {
+        "name": "Artwork",
+        "structure": [{
+            "name": "Phone",
+            "type": "number",
+            "validation": ["required", "ng-minlength='10'", "ng-maxlength='10'"]
+        }]
+    }
+}

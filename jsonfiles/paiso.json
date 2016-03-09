@@ -1,0 +1,284 @@
+{
+  "path": "C:/xampp/htdocs",
+  "projectname": "Paiso",
+  "models": [
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Email",
+          "type": "email",
+          "validation": ""
+        },
+        {
+          "order": 3,
+          "name": "Mobile",
+          "type": "number",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 4,
+          "name": "Photo",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 5,
+          "name": "Notification",
+          "structure": [
+            {
+              "name": "os",
+              "type": "text"
+            },
+            {
+              "name": "devicetoken",
+              "type": "text"
+            }
+          ],
+          "type": "array"
+        },
+        {
+          "order": 6,
+          "name": "Balance",
+          "type": "number",
+          "validation": ""
+        },
+        {
+          "order": 7,
+          "name": "Billing",
+          "structure": [
+            {
+              "name": "paymentmethod",
+              "type": "text"
+            },
+            {
+              "name": "amount",
+              "type": "number"
+            },
+            {
+              "name": "couponcode",
+              "type": "text"
+            },
+            {
+              "name": "status",
+              "type": "text"
+            },
+            {
+              "name": "paisoprovided",
+              "type": "text"
+            }
+          ],
+          "type": "array"
+        },
+        {
+          "order": 8,
+          "name": "Reference",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 9,
+          "name": "Usercode",
+          "type": "text",
+          "validation": ""
+        }
+      ],
+      "name": "User"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Email",
+          "type": "email",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 3,
+          "name": "Description",
+          "type": "textarea",
+          "validation": ""
+        },
+        {
+          "order": 4,
+          "name": "Image",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 5,
+          "name": "Order",
+          "type": "number",
+          "validation": ""
+        },
+        {
+          "order": 6,
+          "name": "Category",
+          "type": "select",
+          "isfromdb": "true",
+          "api": "category",
+          "option": []
+        },
+        {
+          "order": 7,
+          "name": "Cashback",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 8,
+          "name": "Status",
+          "type": "select",
+          "isfromdb": "false",
+          "api": "",
+          "option": [
+            {
+              "value": "yes",
+              "name": "Yes"
+            },
+            {
+              "value": "no",
+              "name": "No"
+            }
+          ]
+        }
+      ],
+      "name": "Vendors"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "Name",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 2,
+          "name": "Order",
+          "type": "number",
+          "validation": ""
+        },
+        {
+          "order": 3,
+          "name": "Status",
+          "type": "select",
+          "isfromdb": "false",
+          "api": "",
+          "option": [
+            {
+              "value": "yes",
+              "name": "Yes"
+            },
+            {
+              "value": "no",
+              "name": "No"
+            }
+          ]
+        }
+      ],
+      "name": "Category"
+    },
+    {
+      "structure": [
+        {
+          "order": 1,
+          "name": "From",
+          "type": "select",
+          "isfromdb": "true",
+          "api": "user",
+          "option": []
+        },
+        {
+          "order": 2,
+          "name": "To",
+          "type": "text",
+          "validation": [
+            "required"
+          ]
+        },
+        {
+          "order": 3,
+          "name": "Paiso",
+          "type": "number",
+          "validation": ""
+        },
+        {
+          "order": 4,
+          "name": "Comment",
+          "type": "textarea",
+          "validation": ""
+        },
+        {
+          "order": 5,
+          "name": "Status",
+          "type": "select",
+          "isfromdb": "false",
+          "api": "",
+          "option": [
+            {
+              "value": "yes",
+              "name": "Yes"
+            },
+            {
+              "value": "no",
+              "name": "No"
+            }
+          ]
+        },
+        {
+          "order": 6,
+          "name": "Voucher",
+          "type": "text",
+          "validation": ""
+        },
+        {
+          "order": 7,
+          "name": "Type",
+          "type": "select",
+          "isfromdb": "false",
+          "api": "",
+          "option": [
+            {
+              "value": "utov",
+              "name": "User to Vendor"
+            },
+            {
+              "value": "utou",
+              "name": "User to User"
+            }
+          ]
+        },
+        {
+          "order": 8,
+          "name": "Validtill",
+          "type": "text",
+          "validation": ""
+        }
+      ],
+      "name": "Transaction"
+    }
+  ]
+}
