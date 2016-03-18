@@ -374,9 +374,9 @@ function addServiceData(n) {
         switch (m.type) {
             case "uiselect":
                 {
-                    tagdataservice += "save" + sails._.capitalize(m.name) + ": function (data, callback) {$http({url: adminurl + '" + m.name.toLowerCase() + "/save',method: 'POST',data: {'name':data.name}}).success(callback);},";
+                    tagdataservice += "save" + sails._.capitalize(sails._.camelCase(m.name)) + ": function (data, callback) {$http({url: adminurl + '" + sails._.camelCase(m.name).toLowerCase() + "/save',method: 'POST',data: {'name':data.name}}).success(callback);},";
 
-                    tagdataservice += "find" + sails._.capitalize(m.name) + ": function (data, " + m.name.toLowerCase() + ", callback) {$http({url: adminurl + '" + m.name.toLowerCase() + "/find',method: 'POST',data: {search: data," + m.name.toLowerCase() + ": " + m.name.toLowerCase() + "}}).success(callback);},"
+                    tagdataservice += "find" + sails._.capitalize(sails._.camelCase(m.name)) + ": function (data, " + m.name.toLowerCase() + ", callback) {$http({url: adminurl + '" + sails._.camelCase(m.name).toLowerCase() + "/find',method: 'POST',data: {search: data," + sails._.camelCase(m.name).toLowerCase() + ": " + sails._.camelCase(m.name).toLowerCase() + "}}).success(callback);},"
                     break;
                 };
 
