@@ -271,7 +271,7 @@ function getControllerData(data, n, fromdata, state) {
 
         if (data == 'edit' || state == 'edit') {
             if (data == "edit") {
-                tagdata += "NavigationService.getOne" + sails._.capitalize(n.name) + "($routeParams.id, function (data, status) {$scope." + n.name.toLowerCase() + " = data;";
+                tagdata += "NavigationService.getOne" + sails._.capitalize(n.name) + "($routeParams.id, function (data, status) {$scope." + n.name.toLowerCase() + " = data.data;";
             }
             _.each(n.structure, function(m) {
                 if (m.type == "array") {
@@ -416,7 +416,7 @@ function addService(service) {
             var splitdata = updowndata.split("//Add New Controller");
             tagdata = "";
             _.each(service.models, function(n) {
-                tagdata += "//" + sails._.capitalize(n.name) + " Controller\nphonecatControllers.controller('" + sails._.capitalize(n.name) + "Ctrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {$scope.template = TemplateService;$scope.menutitle =NavigationService.makeactive('" + sails._.capitalize(n.name) + "');TemplateService.title = $scope.menutitle;TemplateService.submenu = '';TemplateService.content = 'views/" + n.name.toLowerCase() + ".html';TemplateService.list = 2;$scope.navigation = NavigationService.getnav();$scope." + n.name + " = [];$scope.pagedata = {};$scope.pagedata.page = 1;$scope.pagedata.limit = '20';$scope.pagedata.search = '';$scope.number = 100;$scope.reload = function (pagedata) {$scope.pagedata = pagedata;NavigationService.findLimited" + sails._.capitalize(n.name) + "($scope.pagedata, function (data, status) {$scope." + n.name.toLowerCase() + " = data;$scope.pages = [];var newclass = '';for (var i = 1; i <= data.totalpages; i++) {if (pagedata.page == i) {newclass = 'active';} else {newclass = '';}$scope.pages.push({pageno: i,class: newclass});}});}$scope.reload($scope.pagedata);$scope.confDelete = function() {NavigationService.delete" + sails._.capitalize(n.name) + "(function(data, status) {ngDialog.close();window.location.reload();});}$scope.deletefun = function(id) {$.jStorage.set('delete" + n.name.toLowerCase() + "', id);ngDialog.open({template: 'views/delete.html',closeByEscape: false,controller: '" + sails._.capitalize(n.name) + "Ctrl',closeByDocument: false});}\n//End " + sails._.capitalize(n.name) + "\n});\n//" + n.name.toLowerCase() + " Controller\n";
+                tagdata += "//" + sails._.capitalize(n.name) + " Controller\nphonecatControllers.controller('" + sails._.capitalize(n.name) + "Ctrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {$scope.template = TemplateService;$scope.menutitle =NavigationService.makeactive('" + sails._.capitalize(n.name) + "');TemplateService.title = $scope.menutitle;TemplateService.submenu = '';TemplateService.content = 'views/" + n.name.toLowerCase() + ".html';TemplateService.list = 2;$scope.navigation = NavigationService.getnav();$scope." + n.name + " = [];$scope.pagedata = {};$scope.pagedata.page = 1;$scope.pagedata.limit = '20';$scope.pagedata.search = '';$scope.number = 100;$scope.reload = function (pagedata) {$scope.pagedata = pagedata;NavigationService.findLimited" + sails._.capitalize(n.name) + "($scope.pagedata, function (data, status) {$scope." + n.name.toLowerCase() + " = data.data;$scope.pages = [];var newclass = '';for (var i = 1; i <= data.data.totalpages; i++) {if (pagedata.page == i) {newclass = 'active';} else {newclass = '';}$scope.pages.push({pageno: i,class: newclass});}});}$scope.reload($scope.pagedata);$scope.confDelete = function() {NavigationService.delete" + sails._.capitalize(n.name) + "(function(data, status) {ngDialog.close();window.location.reload();});}$scope.deletefun = function(id) {$.jStorage.set('delete" + n.name.toLowerCase() + "', id);ngDialog.open({template: 'views/delete.html',closeByEscape: false,controller: '" + sails._.capitalize(n.name) + "Ctrl',closeByDocument: false});}\n//End " + sails._.capitalize(n.name) + "\n});\n//" + n.name.toLowerCase() + " Controller\n";
 
                 tagdata += getControllerData("create", n, "", "");
                 tagdata += getControllerData("edit", n, "", "");
@@ -440,11 +440,11 @@ function addService(service) {
             var splitdataservice = data.split("//Add New Service");
             _.each(service.models, function(n) {
 
-                tagdataservice += "getOne" + sails._.capitalize(n.name) + ": function (id, callback) {$http({url: adminurl + '" + n.name.toLowerCase() + "/findone',method: 'POST',data: {'_id':id}}).success(callback);},";
+                tagdataservice += "getOne" + sails._.capitalize(n.name) + ": function (id, callback) {$http({url: adminurl + '" + n.name.toLowerCase() + "/findOne',method: 'POST',data: {'_id':id}}).success(callback);},";
 
                 tagdataleft += "{name: '" + sails._.capitalize(n.name) + "',active: '',link: '#/" + n.name.toLowerCase() + "',subnav: []},";
 
-                tagdataservice += "findLimited" + sails._.capitalize(n.name) + ": function(" + n.name.toLowerCase() + ", callback) {$http({url: adminurl + '" + n.name.toLowerCase() + "/findlimited',method: 'POST',data: {'search': " + n.name.toLowerCase() + ".search,'pagesize': parseInt(" + n.name.toLowerCase() + ".limit),'pagenumber': parseInt(" + n.name.toLowerCase() + ".page)}}).success(callback);},";
+                tagdataservice += "findLimited" + sails._.capitalize(n.name) + ": function(" + n.name.toLowerCase() + ", callback) {$http({url: adminurl + '" + n.name.toLowerCase() + "/findLimited',method: 'POST',data: {'search': " + n.name.toLowerCase() + ".search,'pagesize': parseInt(" + n.name.toLowerCase() + ".limit),'pagenumber': parseInt(" + n.name.toLowerCase() + ".page)}}).success(callback);},";
 
                 tagdataservice += "delete" + sails._.capitalize(n.name) + ": function (callback) {$http({url: adminurl + '" + n.name.toLowerCase() + "/delete',method: 'POST',data: {'_id': $.jStorage.get('delete" + n.name.toLowerCase() + "')}}).success(callback);},";
 
